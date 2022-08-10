@@ -4,8 +4,9 @@
 Solution of classical synchronization problem about
 [dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 where each philosopher is a thread and mutexes are used to prevent deadlocks.
-The code is written in accordance with The Norm (42 coding style) and **the whole
-code is documented with docstrings**.
+The code is written in accordance with The Norm (42 coding style). 
+
+**Also the whole code is documented with docstrings (start from the header file)**.
 
 [Subject dissection](doc/subject.md)
 
