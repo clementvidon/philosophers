@@ -1,0 +1,9 @@
+*.o
+*.d
+*.a
+malloc_test
+*.log
+.vscode
+*.tmp
+test_bin
+config.sh

@@ -1,0 +1,6 @@
+[submodule "lib/libft_42"]
+	path = lib/libft_42
+	url = git@github.com:clemedon/libft_42.git
+[submodule "test/ft_mallocator"]
+	path = test/ft_mallocator
+	url = https://github.com/tmatis/ft_mallocator.git

@@ -1,0 +1,17 @@
+# Compiled source #
+###################
+*.o
+*.a
+*.out
+*.so
+philo
+
+# Editor Files #
+################
+*.swo
+*.swp
+*~
+
+# Tags #
+########
+tags
