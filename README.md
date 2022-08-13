@@ -117,6 +117,8 @@ of the application as the number of threads increase."
 
 - [philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)
 
+###     Memory
+
 - [ft_mallocator](https://github.com/tmatis/ft_mallocator)
 
 > Don't forget to protect '**pthread_create**', ft_mallocator won't warn you
@@ -125,8 +127,10 @@ of the application as the number of threads increase."
 > Don't forget to protect '**gettimeofday**', no malloc behind but easily
 > crash-able from the user side.
 
-- valgrind: `valgrind -q --tool=helgrind`
 - valgrind: `valgrind -q --leak-check=yes --show-leak-kinds=all`
 
+###     Thread
+
 - sanitizer: `-fsanitize=thread`
-- sanitizer: `-fsanitize=address`
+
+- valgrind: `valgrind -q --tool=helgrind`
