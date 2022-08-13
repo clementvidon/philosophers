@@ -1,4 +1,5 @@
-# Makefile for C programs that requires no dependencies.
+# Makefile for a single file C programs that doesn't require
+# any dependencies.
 
 NAME		= a.out
 
@@ -12,7 +13,7 @@ OBJS		:= $(SRCS:%.c=%.o)
 #	SHELL CMDS									 #
 #------------------------------------------------#
 
-RM			= rm -rf
+RM			= rm -f
 VALGRIND	= valgrind -q --leak-check=yes --show-leak-kinds=all
 HELGRIND	= valgrind -q --tool=helgrind
 ARGS		= ${nowhere}
@@ -21,7 +22,7 @@ ARGS		= ${nowhere}
 #	RECIPES										 #
 #------------------------------------------------#
 
-.PHONY: all san_addr san_thread clean fclean re norm update malloc_test
+.PHONY: all san_addr san_thread clean fclean re norm update malloc_test run valgrind_run helgrind_run
 
 all: $(NAME)
 
@@ -42,20 +43,16 @@ $(NAME): $(OBJS)
 	@$(ECHO)"$(G)created $(END)objects"
 
 clean:
-	@[ -f $(OBJS) ] \
-		&& $(RM) $(OBJS) && $(ECHO)"$(R)removed$(END) objects\n" || true
+	@$(RM) $(OBJS) && $(ECHO)"$(R)removed$(END) objects\n" || true
 
 fclean: clean
-	@[ -f $(NAME) ] \
-		&& $(RM) $(NAME) && $(ECHO)"$(R)removed$(END) $(NAME)\n" || true
+	@$(RM) $(NAME) && $(ECHO)"$(R)removed$(END) $(NAME)\n" || true
 
 re : fclean all
 
 norm:
-	@norminette -R CheckForbiddenSourceHeader $(SRCS) | grep -v "OK" || true
-	@$(ECHO)"$(G)checked$(END) sources\n"
-	@norminette -R CheckDefine | grep -v "OK" || true
-	@$(ECHO)"$(G)checked$(END) headers\n"
+	@norminette | grep -v "OK" || true
+	@$(ECHO)"$(G)checked norm$(END)\n"
 
 update:
 	@git pull

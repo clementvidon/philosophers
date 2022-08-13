@@ -30,8 +30,6 @@ static int	ft_start_eating(t_philo *philo)
 
 	lfork = philo->id - 1;
 	rfork = philo->id % philo->data->philo_nb;
-	pthread_mutex_lock (&philo->data->mutex[PRINT]);
-	pthread_mutex_unlock (&philo->data->mutex[PRINT]);
 	pthread_mutex_lock (&philo->fork[ft_min (lfork, rfork)]);
 	ft_print (philo, "has taken a fork");
 	if (lfork == rfork)
