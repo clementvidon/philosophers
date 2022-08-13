@@ -130,4 +130,3 @@ of the application as the number of threads increase."
 
 - sanitizer: `-fsanitize=thread`
 - sanitizer: `-fsanitize=address`
-# philosophers_42
