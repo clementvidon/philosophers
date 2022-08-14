@@ -13,10 +13,10 @@
 #include "philo.h"
 
 /*
- ** @brief		Destroy all the mutexes.
+ ** @brief      Destroy all the mutexes.
  **
- ** @param[in]	philo the simulation's struct.
- ** @param[in]	data the simulator's struct.
+ ** @param[in]  philo the simulation's struct.
+ ** @param[in]  data the simulator's struct.
  */
 
 static void	ft_destroy_mutexes(t_philo *philo, t_data *data)
@@ -32,11 +32,11 @@ static void	ft_destroy_mutexes(t_philo *philo, t_data *data)
 }
 
 /*
- ** @brief		Check if all philos ate at least 'must_eat' times.
+ ** @brief      Check if all philos ate at least 'must_eat' times.
  **
- ** @param[in]	philo the simulation's struct.
- ** @param[in]	data the simulator's struct.
- ** @return		True or false.
+ ** @param[in]  philo the simulation's struct.
+ ** @param[in]  data the simulator's struct.
+ ** @return     True or false.
  */
 
 static bool	ft_are_done(t_philo *philo, t_data *data)
@@ -62,14 +62,14 @@ static bool	ft_are_done(t_philo *philo, t_data *data)
 }
 
 /*
- ** @brief		Continuously check the simulation's termination conditions.
+ ** @brief      Continuously check the simulation's termination conditions.
  **
  ** If one death occurs.
  ** If all the philosophers ate at least 'must_eat' times.
  **
- ** @param[in]	philo the simulation's struct.
- ** @param[in]	data the simulator's struct.
- ** @return		0 if everything went well.
+ ** @param[in]  philo the simulation's struct.
+ ** @param[in]  data the simulator's struct.
+ ** @return     0 if everything went well.
  */
 
 static int	ft_monitor(t_philo *philo, t_data *data)
@@ -101,13 +101,13 @@ static int	ft_monitor(t_philo *philo, t_data *data)
 }
 
 /*
- ** @brief		Threads manager.
+ ** @brief      Threads manager.
  **
  ** Generate, manage and destroy the simulation required threads.
  **
- ** @param[in]	philo the simulation's struct.
- ** @param[in]	data the simulator's struct.
- ** @return		0 if everything went well, otherwise 1.
+ ** @param[in]  philo the simulation's struct.
+ ** @param[in]  data the simulator's struct.
+ ** @return     0 if everything went well, otherwise 1.
  */
 
 int	ft_simulator(t_philo *philo, t_data *data)

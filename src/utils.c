@@ -13,13 +13,13 @@
 #include "philo.h"
 
 /*
- ** @brief		Convert a numerical string to a long integer value.
+ ** @brief      Convert a numerical string to a long integer value.
  **
- ** @param[in]	str the numerical string to convert.
- ** @return		a long integer value.
+ ** @param[in]  str the numerical string to convert.
+ ** @return     a long integer value.
  */
 
-long	ft_atol(const char *str)
+long	ft_atol(char const *str)
 {
 	long	sign;
 	long	nb;
@@ -44,10 +44,10 @@ long	ft_atol(const char *str)
 }
 
 /*
- ** @brief		Max value.
+ ** @brief      Max value.
  **
- ** @param[in]	a a value.
- ** @param[in]	b a different another value.
+ ** @param[in]  a a value.
+ ** @param[in]  b a different another value.
  */
 
 int	ft_max(int a, int b)
@@ -58,10 +58,10 @@ int	ft_max(int a, int b)
 }
 
 /*
- ** @brief		Min value.
+ ** @brief      Min value.
  **
- ** @param[in]	a a value.
- ** @param[in]	b a different value.
+ ** @param[in]  a a value.
+ ** @param[in]  b a different value.
  */
 
 int	ft_min(int a, int b)

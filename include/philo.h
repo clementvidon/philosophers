@@ -107,7 +107,7 @@ typedef struct s_philo
  ** utils.c
  */
 
-long			ft_atol(const char *str);
+long			ft_atol(char const *str);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 
@@ -115,7 +115,7 @@ int				ft_max(int a, int b);
  ** simulator_utils.c
  */
 
-void			ft_print(t_philo *philo, char *action);
+void			ft_print(t_philo *philo, char const *const action);
 void			ft_died(t_data *data);
 void			ft_done(t_data *data);
 
@@ -157,8 +157,8 @@ int				ft_simulator(t_philo *philo, t_data *data);
 
 int				ft_init_philo(t_philo **philo, t_data *data);
 int				ft_init_data_mutexes(t_data **data);
-int				ft_init_data(t_data **data, int ac, char **av);
-int				ft_init(t_philo **philo, t_data **data, int ac, char **av);
+int				ft_init_data(t_data **data, int ac, char const *const *argv);
+int				ft_init(t_philo **p, t_data **d, int ac, char const *const *av);
 
 /*
  ** checkargs.c
@@ -166,8 +166,8 @@ int				ft_init(t_philo **philo, t_data **data, int ac, char **av);
  ** @brief	Protect and make sure the user given parameters are valid.
  */
 
-//bool			ft_is_numeric(char *str)
-int				ft_check_args(int ac, char **av);
+//bool			ft_is_numeric(char const *str)
+int				ft_check_args(int ac, char const *const *argv);
 
 /*
  ** main.c
@@ -176,7 +176,7 @@ int				ft_check_args(int ac, char **av);
  */
 
 //void			ft_clear_memory(t_philo *philo, t_data *data)
-//bool			ft_edgecases(int ac, char **av)
-int				main(int ac, char **av);
+//bool			ft_edgecases(int ac, char const *const *argv)
+int				main(int ac, char const *const *argv);
 
 #endif

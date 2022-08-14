@@ -13,10 +13,10 @@
 #include "philo.h"
 
 /*
- ** @brief		Clear all the program dynamically allocated memory.
+ ** @brief      Clear all the program dynamically allocated memory.
  **
- ** @param[in]	philo the simulation's struct.
- ** @param[in]	data the simulator's struct.
+ ** @param[in]  philo the simulation's struct.
+ ** @param[in]  data the simulator's struct.
  */
 
 static void	ft_clear_memory(t_philo *philo, t_data *data)
@@ -42,7 +42,7 @@ static void	ft_clear_memory(t_philo *philo, t_data *data)
  ** @return     1 if there are no matching edge case, otherwise 0.
  */
 
-static bool	ft_edgecases(int ac, char **av)
+static bool	ft_edgecases(int ac, char const *const *av)
 {
 	if ((ac == 6 && ft_atol (av[5]) == 0))
 		return (true);
@@ -52,18 +52,18 @@ static bool	ft_edgecases(int ac, char **av)
 }
 
 /*
- ** @brief		Start and terminate the program.
+ ** @brief      Start and terminate the program.
  **
  ** Input info:
  **  ./philo philo_nb time_die time_eat time_slp [ must_eat ]
  **  Example: ./philo 4 410 200 200 7
  **
- ** @param[in]	ac the number of arguments given at program start.
- ** @param[in]	av the arguments given at program start.
- ** @return		0 if everything went well, otherwise 1.
+ ** @param[in]  ac the number of arguments given at program start.
+ ** @param[in]  av the arguments given at program start.
+ ** @return     0 if everything went well, otherwise 1.
  */
 
-int	main(int ac, char **av)
+int	main(int ac, char const *const *av)
 {
 	t_data	*data;
 	t_philo	*philo;

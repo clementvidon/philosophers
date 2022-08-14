@@ -15,9 +15,9 @@
 /*
  ** @brief      Init s_philo an array of philosophers.
  **
- ** @param[in]	philo a pointer to s_philo struct set to NULL.
- ** @param[in]	data a pointer to an initialized s_data struct.
- ** @return		0 if everything went well, otherwise 1.
+ ** @param[in]  philo a pointer to s_philo struct set to NULL.
+ ** @param[in]  data a pointer to an initialized s_data struct.
+ ** @return     0 if everything went well, otherwise 1.
  */
 
 int	ft_init_philo(t_philo **philo, t_data *data)
@@ -50,8 +50,8 @@ int	ft_init_philo(t_philo **philo, t_data *data)
  ** To make it very easy to add a mutex without losing readability despite the
  ** array, the amount of mutexes and their name is definied in the header file.
  **
- ** @param[in]	data a pointer to an initialized s_data struct.
- ** @return		0 if everything went well, otherwise 1.
+ ** @param[in]  data a pointer to an initialized s_data struct.
+ ** @return     0 if everything went well, otherwise 1.
  */
 
 int	ft_init_data_mutexes(t_data **data)
@@ -72,13 +72,13 @@ int	ft_init_data_mutexes(t_data **data)
 /*
  ** @brief      Init s_data the simulator's data.
  **
- ** @param[in]	data a pointer to s_data struct set to NULL.
- ** @param[in]	ac the number of arguments given at program start.
- ** @param[in]	av the arguments given at program start.
- ** @return		0 if everything went well, otherwise 1.
+ ** @param[in]  data a pointer to s_data struct set to NULL.
+ ** @param[in]  ac the number of arguments given at program start.
+ ** @param[in]  av the arguments given at program start.
+ ** @return     0 if everything went well, otherwise 1.
  */
 
-int	ft_init_data(t_data **data, int ac, char **av)
+int	ft_init_data(t_data **data, int ac, char const *const *av)
 {
 	(*data)->simstart = ft_abs_time ();
 	if ((*data)->simstart == FAILURE)
@@ -100,16 +100,16 @@ int	ft_init_data(t_data **data, int ac, char **av)
 }
 
 /*
- ** @brief		Initialize the structs.
+ ** @brief      Initialize the structs.
  **
- ** @param[in]	philo a pointer to s_philo struct set to NULL.
- ** @param[in]	data a pointer to s_data struct set to NULL.
- ** @param[in]	ac the number of arguments given at program start.
- ** @param[in]	av the arguments given at program start.
- ** @return		0 if everything went well, otherwise 1.
+ ** @param[in]  philo a pointer to s_philo struct set to NULL.
+ ** @param[in]  data a pointer to s_data struct set to NULL.
+ ** @param[in]  ac the number of arguments given at program start.
+ ** @param[in]  av the arguments given at program start.
+ ** @return     0 if everything went well, otherwise 1.
  */
 
-int	ft_init(t_philo **philo, t_data **data, int ac, char **av)
+int	ft_init(t_philo **philo, t_data **data, int ac, char const *const *av)
 {
 	*data = (t_data *)malloc (sizeof (t_data));
 	if (*data == NULL)

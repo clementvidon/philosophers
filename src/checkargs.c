@@ -13,13 +13,13 @@
 #include "philo.h"
 
 /*
- ** @brief		Check if a string looks like a positive numeric value.
+ ** @brief      Check if a string looks like a positive numeric value.
  **
- ** @param[in]	str the string to check.
- ** @return		true or false.
+ ** @param[in]  str the string to check.
+ ** @return     true or false.
  */
 
-static bool	ft_is_numeric(char *str)
+static bool	ft_is_numeric(char const *str)
 {
 	int	i;
 
@@ -34,14 +34,14 @@ static bool	ft_is_numeric(char *str)
 }
 
 /*
- ** @brief		Check if the user given arguments are valid.
+ ** @brief      Check if the user given arguments are valid.
  **
- ** @param[in]	ac the number of arguments given at program start.
- ** @param[in]	av the arguments given at program start.
- ** @return		0 if valid, otherwise 1.
+ ** @param[in]  ac the number of arguments given at program start.
+ ** @param[in]  av the arguments given at program start.
+ ** @return     0 if valid, otherwise 1.
  */
 
-int	ft_check_args(int ac, char **av)
+int	ft_check_args(int ac, char const *const *av)
 {
 	if (ac < 5)
 	{

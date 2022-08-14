@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Usage: 'bash custom.sh' from the Makefile file directory.
+
 helgrind_run()
 {
     echo "========================================="

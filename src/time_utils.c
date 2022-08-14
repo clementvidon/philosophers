@@ -13,9 +13,9 @@
 #include "philo.h"
 
 /*
- ** @brief			Return the elapsed time since EPOCH.
+ ** @brief          Return the elapsed time since EPOCH.
  **
- ** @return			the elapsed time since EPOCH in millisecond.
+ ** @return         the elapsed time since EPOCH in millisecond.
  */
 
 unsigned long	ft_abs_time(void)
@@ -35,9 +35,9 @@ unsigned long	ft_abs_time(void)
 }
 
 /*
- ** @brief			Return the time elapsed since simulation start.
+ ** @brief          Return the time elapsed since simulation start.
  **
- ** @return			the time elapsed since simulation start in millisecond.
+ ** @return         the time elapsed since simulation start in millisecond.
  */
 
 unsigned long	ft_rel_time(t_philo *philo)
@@ -51,7 +51,7 @@ unsigned long	ft_rel_time(t_philo *philo)
 }
 
 /*
- ** @brief			Millisecond sleep.
+ ** @brief          Millisecond sleep.
  **
  ** Like 'usleep' function but millisecond instead of microsecond.
  */

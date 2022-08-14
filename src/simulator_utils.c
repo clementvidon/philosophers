@@ -13,12 +13,12 @@
 #include "philo.h"
 
 /*
- ** @brief		Log each philosopher's life cycle actions into the terminal.
+ ** @brief      Log each philosopher's life cycle actions into the terminal.
  **
- ** @param[in]	philo the simulation's struct.
+ ** @param[in]  philo the simulation's struct.
  */
 
-void	ft_print(t_philo *philo, char *action)
+void	ft_print(t_philo *philo, char const *const action)
 {
 	bool	stop_printing;
 
@@ -37,9 +37,9 @@ void	ft_print(t_philo *philo, char *action)
 }
 
 /*
- ** @brief		Officialise the first blood.
+ ** @brief      Officialise the first blood.
  **
- ** @param[in]	data the simulator's struct.
+ ** @param[in]  data the simulator's struct.
  */
 
 void	ft_died(t_data *data)
@@ -50,10 +50,10 @@ void	ft_died(t_data *data)
 }
 
 /*
- ** @brief		Officialise the fact that all the philosophers ate at least
- **				'must_eat' times.
+ ** @brief      Officialise the fact that all the philosophers ate at least
+ **             'must_eat' times.
  **
- ** @param[in]	data the simulator's struct.
+ ** @param[in]  data the simulator's struct.
  */
 
 void	ft_done(t_data *data)

@@ -4,3 +4,6 @@
 [submodule "test/ft_mallocator"]
 	path = test/ft_mallocator
 	url = https://github.com/tmatis/ft_mallocator.git
+[submodule "test/alientest_philosopher"]
+	path = test/alientest_philosopher
+	url = https://github.com/lienardale/alientest_philosopher.git

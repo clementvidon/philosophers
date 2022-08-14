@@ -13,14 +13,14 @@
 #include "philo.h"
 
 /*
- ** @brief		The philosopher take the forks.
+ ** @brief      The philosopher take the forks.
  **
  ** - Using a "locking hierarchy" to prevent deadlock.
  ** - Handle the 'one philo' case by making sure there are not only one fork on
  **   the table: 'lfork == rfork'.
  **
- ** @param[in]	philo the simulation's struct.
- ** @return		0 if everything went well, otherwise 1.
+ ** @param[in]  philo the simulation's struct.
+ ** @return     0 if everything went well, otherwise 1.
  */
 
 static int	ft_start_eating(t_philo *philo)
@@ -44,10 +44,10 @@ static int	ft_start_eating(t_philo *philo)
 }
 
 /*
- ** @brief		The philosopher release the forks.
+ ** @brief      The philosopher release the forks.
  **
- ** @param[in]	philo the simulation's struct.
- ** @return		0 if everything went well.
+ ** @param[in]  philo the simulation's struct.
+ ** @return     0 if everything went well.
  */
 
 static int	ft_finish_eating(t_philo *philo)
@@ -63,24 +63,24 @@ static int	ft_finish_eating(t_philo *philo)
 }
 
 /*
- ** @brief		Philosopher's meal.
+ ** @brief      Philosopher's meal.
  **
  ** - To start to eat, each philosopher needs
  **   his own fork + his left neighbor's one:
  **
- ** 	RFork Philos LFork
- **		------------------
- **	 (P3) P0  ← P1 →  P1 (self)
- ** 	  P1  ← P2 →  P2 (self)
- ** 	  P2  ← P3 →  P0 (self)
- ** 	Where F0 belongs to philo P3.
+ **     RFork Philos LFork
+ **     ------------------
+ **  (P3) P0  ← P1 →  P1 (self)
+ **       P1  ← P2 →  P2 (self)
+ **       P2  ← P3 →  P0 (self)
+ **     Where F0 belongs to philo P3.
  **
  ** - A meal is considered as +1 meal as soon as it starts.  Even though they
  **   are already considered as 'done' philos that started to eat have to
  **   properly finish eating by passing through 'time_eat'.
  **
- ** @param[in]	philo the simulation's struct.
- ** @return		0 if everything went well, otherwise 1.
+ ** @param[in]  philo the simulation's struct.
+ ** @return     0 if everything went well, otherwise 1.
  */
 
 static int	ft_eating(t_philo *philo)
@@ -106,13 +106,13 @@ static int	ft_eating(t_philo *philo)
 }
 
 /*
- ** @brief		Philosopher's life cycle.
+ ** @brief      Philosopher's life cycle.
  **
  ** Odd philosophers are delayed to prevent any conflict during the forks taking
  ** moment.
  **
- ** @param[in]	arg the simulation's struct.
- ** @return		A NULL pointer.
+ ** @param[in]  arg the simulation's struct.
+ ** @return     A NULL pointer.
  */
 
 void	*ft_simulation(void *arg)
