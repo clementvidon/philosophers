@@ -127,7 +127,7 @@ of the application as the number of threads increase."
 
 ###  Memory
 
-- [ft_mallocator](https://github.com/tmatis/ft_mallocator)
+- **[ft_mallocator](https://github.com/tmatis/ft_mallocator)**
 
 > Don't forget to protect '**pthread_create**', ft_mallocator won't warn you
 > about this one.
@@ -177,6 +177,7 @@ with a mutex `2>`.
 
 <br>
 2. Fix example
+<br>
 
 At `simulator_utils.c:47` we have:
 
