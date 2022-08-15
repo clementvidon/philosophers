@@ -17,7 +17,7 @@ Also ***the whole code is documented with docstrings*** (start from the **[heade
 **[Algo](#Algo)**<br>
 **[Optimization](#Optimization)**<br>
 **[Tools](#Tools)**<br>
-**[Helgrind Tutor](#Helgrind Tutor)**<br>
+**[Helgrind Tutor](#Helgrind%20Tutor)**<br>
 
 ##  Usage
 
@@ -147,8 +147,7 @@ of the application as the number of threads increase."
 
 How to track and fix a data race?
 
-Output example
-==============
+1. Output example
 
 'DATA RACE' and 'CONFLICTS' are the main terms that interest us (1) in the
 output of helgrind, 'utils.c:35' and 'utils.c:40' the location of the two
@@ -176,8 +175,7 @@ with a mutex (2).
        ==174034==    by 0x401289: main (main.c:77)
        ==174034==  Block was alloc'd by thread #1
 
-Fix example
-===========
+2. Fix example
 
 - simulator_utils.c:47
 
