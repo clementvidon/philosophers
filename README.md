@@ -4,13 +4,24 @@
 Solution of classical synchronization problem about
 [dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 where each philosopher is a thread and mutexes are used to prevent deadlocks.
-The code is written in accordance with The Norm (42 coding style). 
+The code is written in accordance with The Norm (42 coding style).
 
 Also ***the whole code is documented with docstrings*** (start from the [header](include/philo.h) file).
 
-[Subject dissection](doc/subject.md)
+**[Subject dissection](doc/subject.md)**
 
-#  Usage
+##  Index
+
+**[Usage](#Usage)**<br>
+**[Resources](#Resources)**<br>
+**[Algo](#Algo)**<br>
+**[Optimization](#Optimization)**<br>
+**[Tools](#Tools)**<br>
+**[Memory](#Memory)**<br>
+**[Thread](#Thread)**<br>
+**[Helgrind Tutor](#Helgrind)**<br>
+
+##  Usage
 
 Run `make` in the root of the projet and launch as follows:
 
@@ -39,13 +50,12 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 - make fclean -- deletes object files and philo.
 - make re -- fclean + make.
 
-#  Resources
+##  Resources
 
-- [CodeVault](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)
+- **[CodeVault](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)**<br>
+- **[Concurrent programming](https://begriffs.com/posts/2020-03-23-concurrent-programming.html)**<br>
 
-- [Concurrent programming](https://begriffs.com/posts/2020-03-23-concurrent-programming.html)
-
-#  Algo
+##  Algo
 
 * Philosophers
 
@@ -81,7 +91,7 @@ To obtain the `indexes` of `philo->id`'s two forks we can use:
     LFork = philo->id - 1;
     RFork = philo->id % number_of_philosophers;
 
-#  Optimization
+##  Optimization
 
 1. Locking granularity:
 
@@ -111,13 +121,13 @@ of the application as the number of threads increase."
 
 *Source: Multicore Application Programming by Darryl Gove*
 
-2. [Performance Analysis with Callgrind and Cachegrind](https://www.vi-hps.org/cms/upload/material/tw10/vi-hps-tw10-KCachegrind.pdf)
+2. **[Performance Analysis with Callgrind and Cachegrind](https://www.vi-hps.org/cms/upload/material/tw10/vi-hps-tw10-KCachegrind.pdf)**
 
-#  Tools
+##  Tools
 
-- [philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)
+- **[philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)**
 
-###     Memory
+####  Memory
 
 - [ft_mallocator](https://github.com/tmatis/ft_mallocator)
 
@@ -129,8 +139,75 @@ of the application as the number of threads increase."
 
 - valgrind: `valgrind -q --leak-check=yes --show-leak-kinds=all`
 
-###     Thread
+####  Thread
 
 - sanitizer: `-fsanitize=thread`
 
 - valgrind: `valgrind -q --tool=helgrind`
+
+#####  Helgrind tutor
+
+How to track and fix a data race?
+
+Output example
+==============
+
+'DATA RACE' and 'CONFLICTS' are the main terms that interest us (1) in the
+output of helgrind, 'utils.c:35' and 'utils.c:40' the location of the two
+variables that he indicates to us as being in conflict and that we must protect
+with a mutex (2).
+
+    1> ==174034== Possible DATA RACE during write of size 1 at 0x4A44062 by thread #1
+       ==174034== Locks held: none
+    2> ==174034==    at 0x40262C: ft_died (simulator_utils.c:47)
+       ==174034==    by 0x401C81: ft_monitor (simulator.c:93)
+       ==174034==    by 0x401B14: ft_simulator (simulator.c:132)
+       ==174034==    by 0x4012B8: main (main.c:79)
+       ==174034==
+    1> ==174034== This CONFLICTS with a previous read of size 1 by thread #4
+       ==174034== Locks held: 3, at addresses 0x4A44128 0x4A44250 0x4A442A0
+    2> ==174034==    at 0x40240C: ft_msleep (time_utils.c:77)
+       ==174034==    by 0x402093: ft_eating (simulation.c:103)
+       ==174034==    by 0x401F0A: ft_simulation (simulation.c:136)
+       ==174034==    by 0x483F876: mythread_wrapper (hg_intercepts.c:387)
+       ==174034==    by 0x4862EA6: start_thread (pthread_create.c:477)
+       ==174034==    by 0x4979DEE: clone (clone.S:95)
+       ==174034==  Address 0x4a44062 is 34 bytes inside a block of size 48 alloc'd
+       ==174034==    at 0x48397CF: malloc (vg_replace_malloc.c:307)
+       ==174034==    by 0x401930: ft_init (init.c:114)
+       ==174034==    by 0x401289: main (main.c:77)
+       ==174034==  Block was alloc'd by thread #1
+
+Fix example
+===========
+
+- simulator_utils.c:47
+
+    data->died = true;
+
+Can be protected like this:
+
+    pthread_mutex_lock (&data->mutex[DIED]);
+    data->died = true;
+    pthread_mutex_unlock (&data->mutex[DIED]);
+
+- time_utils.c:47
+
+    if (philo->data->died)
+       return ;
+
+Can be protected like this:
+
+    pthread_mutex_lock (&philo->data->mutex[DIED]);
+    if (philo->data->died)
+       return ((void)pthread_mutex_unlock (&philo->data->mutex[DIED]));
+    pthread_mutex_unlock (&philo->data->mutex[DIED]);
+
+Or like this:
+
+    int died;
+    pthread_mutex_lock (&philo->data->mutex[DIED]);
+    died = philo->data->died;
+    pthread_mutex_unlock (&philo->data->mutex[DIED]);
+    if (died)
+       return ;
