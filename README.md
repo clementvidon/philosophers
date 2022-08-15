@@ -17,7 +17,7 @@ Also ***the whole code is documented with docstrings*** (start from the **[heade
 **[Algo](#Algo)**<br>
 **[Optimization](#Optimization)**<br>
 **[Tools](#Tools)**<br>
-**[Helgrind Tutor](#"Helgrind-tutor")**<br>
+**[Helgrind tutor](#helgrind-tutor)**<br>
 
 ##  Usage
 
