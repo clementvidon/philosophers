@@ -2,11 +2,11 @@
 #           PHILOSOPHERS 42
 
 Solution of classical synchronization problem about
-[dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+**[dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)**
 where each philosopher is a thread and mutexes are used to prevent deadlocks.
 The code is written in accordance with The Norm (42 coding style).
 
-Also ***the whole code is documented with docstrings*** (start from the [header](include/philo.h) file).
+Also ***the whole code is documented with docstrings*** (start from the **[header](include/philo.h)** file).
 
 **[Subject dissection](doc/subject.md)**
 
@@ -17,9 +17,9 @@ Also ***the whole code is documented with docstrings*** (start from the [header]
 **[Algo](#Algo)**<br>
 **[Optimization](#Optimization)**<br>
 **[Tools](#Tools)**<br>
-**[Memory](#Memory)**<br>
-**[Thread](#Thread)**<br>
-**[Helgrind Tutor](#Helgrind)**<br>
+  **[Memory](#Memory)**<br>
+  **[Thread](#Thread)**<br>
+    **[Helgrind Tutor](#Helgrind)**<br>
 
 ##  Usage
 
