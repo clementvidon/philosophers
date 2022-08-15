@@ -17,9 +17,7 @@ Also ***the whole code is documented with docstrings*** (start from the **[heade
 **[Algo](#Algo)**<br>
 **[Optimization](#Optimization)**<br>
 **[Tools](#Tools)**<br>
-  **[Memory](#Memory)**<br>
-  **[Thread](#Thread)**<br>
-    **[Helgrind Tutor](#Helgrind)**<br>
+**[Helgrind Tutor](#Helgrind)**<br>
 
 ##  Usage
 
@@ -127,7 +125,7 @@ of the application as the number of threads increase."
 
 - **[philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)**
 
-####  Memory
+###  Memory
 
 - [ft_mallocator](https://github.com/tmatis/ft_mallocator)
 
@@ -139,13 +137,13 @@ of the application as the number of threads increase."
 
 - valgrind: `valgrind -q --leak-check=yes --show-leak-kinds=all`
 
-####  Thread
+###  Thread
 
 - sanitizer: `-fsanitize=thread`
 
 - valgrind: `valgrind -q --tool=helgrind`
 
-#####  Helgrind tutor
+##  Helgrind tutor
 
 How to track and fix a data race?
 
