@@ -175,29 +175,29 @@ with a mutex `2>`.
        ==174034==    by 0x401289: main (main.c:77)
        ==174034==  Block was alloc'd by thread #1
 
-
+<br>
 2. Fix example
 
-- simulator_utils.c:47
+- At `simulator_utils.c:47` we have:
 
     data->died = true;
 
-Can be protected like this:
+That can be protected like this:
 
     pthread_mutex_lock (&data->mutex[DIED]);
     data->died = true;
     pthread_mutex_unlock (&data->mutex[DIED]);
 
-- time_utils.c:47
+- At `time_utils.c:47` we have:
 
     if (philo->data->died)
-       return ;
+        return ;
 
-Can be protected like this:
+That can be protected like this:
 
     pthread_mutex_lock (&philo->data->mutex[DIED]);
     if (philo->data->died)
-       return ((void)pthread_mutex_unlock (&philo->data->mutex[DIED]));
+        return ((void)pthread_mutex_unlock (&philo->data->mutex[DIED]));
     pthread_mutex_unlock (&philo->data->mutex[DIED]);
 
 Or like this:
