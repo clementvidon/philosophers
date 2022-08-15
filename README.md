@@ -178,9 +178,9 @@ with a mutex `2>`.
 <br>
 2. Fix example
 
-- At `simulator_utils.c:47` we have:
+At `simulator_utils.c:47` we have:
 
-    ```data->died = true;```
+    data->died = true;
 
 That can be protected like this:
 
@@ -188,10 +188,10 @@ That can be protected like this:
     data->died = true;
     pthread_mutex_unlock (&data->mutex[DIED]);
 
-- At `time_utils.c:47` we have:
+At `time_utils.c:47` we have:
 
-    ```if (philo->data->died)
-        return ;```
+    if (philo->data->died)
+        return ;
 
 That can be protected like this:
 
