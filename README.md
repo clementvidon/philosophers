@@ -180,7 +180,7 @@ with a mutex `2>`.
 
 - At `simulator_utils.c:47` we have:
 
-    `data->died = true;`
+    ```data->died = true;```
 
 That can be protected like this:
 
@@ -190,8 +190,8 @@ That can be protected like this:
 
 - At `time_utils.c:47` we have:
 
-    `if (philo->data->died)
-        return ;`
+    ```if (philo->data->died)
+        return ;```
 
 That can be protected like this:
 
