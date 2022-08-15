@@ -17,7 +17,7 @@ Also ***the whole code is documented with docstrings*** (start from the **[heade
 **[Algo](#Algo)**<br>
 **[Optimization](#Optimization)**<br>
 **[Tools](#Tools)**<br>
-**[Helgrind Tutor](#Helgrind%20Tutor)**<br>
+**[Helgrind Tutor](#"Helgrind Tutor")**<br>
 
 ##  Usage
 
@@ -149,8 +149,8 @@ How to track and fix a data race?
 
 1. Output example
 
-'`DATA RACE`' and '`CONFLICTS`' are the main terms that interest us `1>` in the
-output of helgrind, '`utils.c:35`' and '`utils.c:40`' the location of the two
+`DATA RACE` and `CONFLICTS` are the main terms that interest us `1>` in the
+output of helgrind, `utils.c:35` and `utils.c:40` the location of the two
 variables that he indicates to us as being in conflict and that we must protect
 with a mutex `2>`.
 
