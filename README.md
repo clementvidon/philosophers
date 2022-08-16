@@ -25,12 +25,12 @@ Run `make` in the root of the projet and launch as follows:
 
     ./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [ <must_eat> ]
 
-- `number_of_philosophers`: the number of philosophers and forks.
-- `time_to_die`: A philosopher dies if he doesn't start eating
-  `time_to_die` ms after **the beginning of his last meal** (or the simulation).
-- `time_to_eat`: The time it takes for a philosopher to eat.
-- `time_to_sleep`: The time it takes for a philosopher to sleep.
-- `must_eat`: (optional) simulation stops if all philosophers ate at least such
+- `number_of_philosophers` -- the number of philosophers and forks.
+- `time_to_die` -- A philosopher dies if he doesn't start to eat `time_to_die`
+  ms after **the beginning of his last meal** (or the simulation).
+- `time_to_eat` -- The time it takes for a philosopher to eat.
+- `time_to_sleep` -- The time it takes for a philosopher to sleep.
+- `must_eat` -- (optional) simulation stops if all philosophers ate at least such
   amount of times.
 
 For example with `./philo 4 410 200 200` the dinner should never stop.
@@ -43,10 +43,10 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 
 ***Makefile rules***
 
-- make -- compiles philo.
-- make clean -- deletes object files.
-- make fclean -- deletes object files and philo.
-- make re -- fclean + make.
+- `make` -- compiles philo.
+- `make clean` -- deletes object files.
+- `make fclean` -- deletes object files and philo.
+- `make re` -- `fclean` + `make``.`
 
 ##  Resources
 
