@@ -1,4 +1,5 @@
-# Makefile for C programs without dependencies.
+# @author   cvidon@42
+# @brief    Makefile for C programs that does not require any dependency.
 
 INC_DIR		= include
 SRC_DIR		= src
@@ -27,7 +28,7 @@ NAME		= philo
 RM			= rm -rf
 VALGRIND	= valgrind -q --leak-check=yes --show-leak-kinds=all
 HELGRIND	= valgrind -q --tool=helgrind
-AV		= $(nullstring)
+AV			= $(nullstring)
 
 #------------------------------------------------#
 #	RECIPES										 #
@@ -65,12 +66,8 @@ fclean: clean
 re : fclean all
 
 norm:
-	@norminette -R CheckForbiddenSourceHeader $(SRCS) | grep -v "OK" || true
-	@norminette $(SRCS) | grep -v "OK" || true
-	@$(ECHO)"$(G)checked$(END) sources\n"
-	@norminette -R CheckDefine $(INC_DIR) | grep -v "OK" || true
-	@norminette $(INC_DIR) | grep -v "OK" || true
-	@$(ECHO)"$(G)checked$(END) headers\n"
+	@norminette | grep -v "OK" || true
+	@$(ECHO)"$(G)checked norm$(END)\n"
 
 update:
 	@git pull
@@ -78,7 +75,8 @@ update:
 	@$(ECHO)"$(G)updated$(END)\n"
 
 malloc_test: $(OBJS)
-	@clang -Wall -Wextra -Werror -g -fsanitize=undefined -rdynamic -o $@ ${OBJS} -Ltest/ft_mallocator -lmallocator
+	@clang -Wall -Wextra -Werror -g -fsanitize=undefined -rdynamic -o $@ $(OBJS) \
+		-Ltest/ft_mallocator -lmallocator
 
 run:
 	@./$(NAME) $(AV) || true
