@@ -16,7 +16,7 @@
  ** @brief      Check if a string looks like a positive numeric value.
  **
  ** @param[in]  str the string to check.
- ** @return     true or false.
+ ** @return     True or false.
  */
 
 static bool	ft_is_numeric(char const *str)

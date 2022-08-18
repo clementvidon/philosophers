@@ -15,7 +15,7 @@
 /*
  ** @brief          Return the elapsed time since EPOCH.
  **
- ** @return         the elapsed time since EPOCH in millisecond.
+ ** @return         The elapsed time since EPOCH in millisecond.
  */
 
 unsigned long	ft_abs_time(void)
@@ -37,7 +37,8 @@ unsigned long	ft_abs_time(void)
 /*
  ** @brief          Return the time elapsed since simulation start.
  **
- ** @return         the time elapsed since simulation start in millisecond.
+ ** @param[in]      philo the simulation's struct.
+ ** @return         The time elapsed since simulation start in millisecond.
  */
 
 unsigned long	ft_rel_time(t_philo *philo)
@@ -54,6 +55,9 @@ unsigned long	ft_rel_time(t_philo *philo)
  ** @brief          Millisecond sleep.
  **
  ** Like 'usleep' function but millisecond instead of microsecond.
+ **
+ ** @param[in]      philo the simulation's struct.
+ ** @param[in]      duration the sleep duration in millisecond.
  */
 
 void	ft_msleep(t_philo *philo, long duration)

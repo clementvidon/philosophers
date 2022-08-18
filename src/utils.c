@@ -48,6 +48,7 @@ long	ft_atol(char const *str)
  **
  ** @param[in]  a a value.
  ** @param[in]  b a different another value.
+ ** @return     The biggest value.
  */
 
 int	ft_max(int a, int b)
@@ -62,6 +63,7 @@ int	ft_max(int a, int b)
  **
  ** @param[in]  a a value.
  ** @param[in]  b a different value.
+ ** @return     The smallest value.
  */
 
 int	ft_min(int a, int b)
