@@ -175,9 +175,7 @@ with a mutex `2>`.
        ==174034==    by 0x401289: main (main.c:77)
        ==174034==  Block was alloc'd by thread #1
 
-<br>
-2. Fix example
-<br>
+2. Fix example<br>
 
 At `simulator_utils.c:47` we have:
 
