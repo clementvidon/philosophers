@@ -2,13 +2,13 @@
 #           PHILOSOPHERS 42
 
 Solution of classical synchronization problem about
-**[dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)**
+[dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 where each philosopher is a thread and mutexes are used to prevent deadlocks.
 The code is written in accordance with The Norm (42 coding style).
 
-**[> Subject <](doc/subject.md)**
+**[SUBJECT](doc/subject.md)**
 
-***Whole code is documented with docstrings*** (start from the **[header](include/philo.h)** file).
+***Whole code is documented with docstrings*** (start from the [header](include/philo.h) file).
 
 ##  Index
 
@@ -50,8 +50,8 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 
 ##  Resources
 
-- **[CodeVault](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)**<br>
-- **[Concurrent programming](https://begriffs.com/posts/2020-03-23-concurrent-programming.html)**<br>
+- [CodeVault](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)<br>
+- [Concurrent programming](https://begriffs.com/posts/2020-03-23-concurrent-programming.html)<br>
 
 ##  Algo
 
@@ -119,15 +119,15 @@ of the application as the number of threads increase."
 
 *Source: Multicore Application Programming by Darryl Gove*
 
-2. **[Performance Analysis with Callgrind and Cachegrind](https://www.vi-hps.org/cms/upload/material/tw10/vi-hps-tw10-KCachegrind.pdf)**
+2. [Performance Analysis with Callgrind and Cachegrind](https://www.vi-hps.org/cms/upload/material/tw10/vi-hps-tw10-KCachegrind.pdf)
 
 ##  Tools
 
-- **[philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)**
+- [philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)
 
 ###  Memory
 
-- **[ft_mallocator](https://github.com/tmatis/ft_mallocator)**
+- [ft_mallocator](https://github.com/tmatis/ft_mallocator)
 
 > Don't forget to protect '**pthread_create**', ft_mallocator won't warn you
 > about this one.
