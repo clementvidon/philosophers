@@ -36,7 +36,6 @@
 # define FAILURE	1
 
 /* Simulator's mutexes */
-
 # define M_NUM		4
 # define PRINT		0
 # define MEALS		1
@@ -48,19 +47,19 @@
  */
 
 /*
- ** @brief		Simulator's data.
+ ** @brief      Simulator's data.
  **
- ** @var		philo_nb the number of philosophers.
- ** @var		time_die the philosophers time to die (in ms).
- ** @var		time_eat the philosophers time to eat (in ms).
- ** @var		time_slp the philosophers time to sleep (in ms).
- ** @var		must_eat the maximum number of times each philo must eat.
+ ** @var        philo_nb the number of philosophers.
+ ** @var        time_die the philosophers time to die (in ms).
+ ** @var        time_eat the philosophers time to eat (in ms).
+ ** @var        time_slp the philosophers time to sleep (in ms).
+ ** @var        must_eat the maximum number of times each philo must eat.
  **
- ** @var		simstart the Epoch time when the simulation starts.
- ** @var		createko is true when pthread_create sucks, simulation stops.
- ** @var		done is true when all philos ate must_eat times, sim stops.
- ** @var		died is true when one philo died, simulation stops.
- ** @var		mutex an array of mutexes for the simulation operations.
+ ** @var        simstart the Epoch time when the simulation starts.
+ ** @var        createko is true when pthread_create sucks, simulation stops.
+ ** @var        done is true when all philos ate must_eat times, sim stops.
+ ** @var        died is true when one philo died, simulation stops.
+ ** @var        mutex an array of mutexes for the simulation operations.
  */
 
 typedef struct s_data
@@ -80,13 +79,13 @@ typedef struct s_data
 }					t_data;
 
 /*
- ** @brief		Simulation's data.
+ ** @brief      Simulation's data.
  **
- ** @var		id the name of the philosopher.
- ** @var		last_meal the Epoch time of the last meal eaten.
- ** @var		meals_counter the number of meals eaten.
- ** @var		fork a mutex that symbolize one fork from philos dining problem.
- ** @var		data the access to s_data parameters.
+ ** @var        id the name of the philosopher.
+ ** @var        last_meal the Epoch time of the last meal eaten.
+ ** @var        meals_counter the number of meals eaten.
+ ** @var        fork a mutex that symbolize one fork from philos dining problem.
+ ** @var        data the access to s_data parameters.
  */
 
 typedef struct s_philo
@@ -130,7 +129,7 @@ void			ft_msleep(t_philo *philo, long duration);
 /*
  ** simulation.c
  **
- ** @brief	Define each philosopher (threads) life cycle.
+ ** @brief      Define each philosopher (threads) life cycle.
  */
 
 //int  			ft_start_eating(t_philo *philo);
@@ -141,7 +140,7 @@ void			*ft_simulation(void *arg);
 /*
  ** simulator.c
  **
- ** @brief	Generate, manage and destroy the simulation required threads.
+ ** @brief      Generate, manage and destroy the simulation required threads.
  */
 
 //void 			ft_destroy_mutexes(t_philo *philo, t_data *data)
@@ -152,7 +151,7 @@ int				ft_simulator(t_philo *philo, t_data *data);
 /*
  ** init.c
  **
- ** @brief	Initialize the C structures.
+ ** @brief      Initialize the C structures.
  */
 
 int				ft_init_philo(t_philo **philo, t_data *data);
@@ -163,7 +162,7 @@ int				ft_init(t_philo **p, t_data **d, int ac, char const *const *av);
 /*
  ** checkargs.c
  **
- ** @brief	Protect and make sure the user given parameters are valid.
+ ** @brief      Protect and make sure the user given parameters are valid.
  */
 
 //bool			ft_is_numeric(char const *str)
@@ -171,8 +170,6 @@ int				ft_check_args(int ac, char const *const *argv);
 
 /*
  ** main.c
- **
- ** Start and terminate the program.
  */
 
 //void			ft_clear_memory(t_philo *philo, t_data *data)

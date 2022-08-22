@@ -15,10 +15,10 @@ SRCS		= main.c 			\
 			  utils.c 			\
 
 CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -Wconversion -Wsign-conversion -g
+CFLAGS		= -Wall -Wextra -Werror -Wconversion -Wsign-conversion
 CPPFLAGS	= -Iinclude -pthread
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
-OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 NAME		= philo
 
 #------------------------------------------------#
