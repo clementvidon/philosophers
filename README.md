@@ -23,7 +23,7 @@
 	<span> · </span>
 	<a href="#Tools">Tools</a>
 	<span> · </span>
-	<a href="#Helgrind tutor">helgrind-tutor</a>
+	<a href="#helgrind-tutor">Helgrind tutor</a>
 	<span> · </span>
 	<a href="#Tools">Tools</a>
 </h3>
