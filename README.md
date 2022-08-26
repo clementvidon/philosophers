@@ -16,8 +16,6 @@
 	<a href="#Tools">Tools</a>
 	<span> · </span>
 	<a href="#helgrind-tutor">Helgrind tutor</a>
-	<span> · </span>
-	<a href="#Tools">Tools</a>
 </h3>
 
 ##  Summary
