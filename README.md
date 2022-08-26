@@ -1,5 +1,34 @@
+<h1 align="center">
+	PHILOSOPHERS 42
+</h1>
 
-#           PHILOSOPHERS 42
+<p align="center">
+	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/clemedon/philosophers_42?color=blueviolet" />
+	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/clemedon/philosophers_42?color=blueviolet" />
+	<img alt="Code language count" src="https://img.shields.io/github/languages/count/clemedon/philosophers_42?color=blue" />
+	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/clemedon/philosophers_42?color=blue" />
+	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/clemedon/philosophers_42?color=brightgreen" />
+</p>
+
+<h3 align="center">
+	<a href="#Summary">Summary</a>
+	<span> · </span>
+	<a href="#Usage">Usage</a>
+	<span> · </span>
+	<a href="#Resources">Resources</a>
+	<span> · </span>
+	<a href="#Algo">Algo</a>
+	<span> · </span>
+	<a href="#Optimization">Optimization</a>
+	<span> · </span>
+	<a href="#Tools">Tools</a>
+	<span> · </span>
+	<a href="#Helgrind tutor">helgrind-tutor</a>
+	<span> · </span>
+	<a href="#Tools">Tools</a>
+</h3>
+
+##  Summary
 
 Solution of classical synchronization problem about
 [dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
@@ -9,15 +38,6 @@ The code is written in accordance with The Norm (42 coding style).
 **[SUBJECT](doc/subject.md)**
 
 ***Whole code is documented with docstrings*** (start from the [header](include/philo.h) file).
-
-##  Index
-
-* **[Usage](#Usage)**<br>
-* **[Resources](#Resources)**<br>
-* **[Algo](#Algo)**<br>
-* **[Optimization](#Optimization)**<br>
-* **[Tools](#Tools)**<br>
-* **[Helgrind tutor](#helgrind-tutor)**<br>
 
 ##  Usage
 
