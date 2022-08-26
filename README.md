@@ -1,6 +1,8 @@
 
 #           PHILOSOPHERS 42
 
+##  Summary
+
 Solution of classical synchronization problem about
 [dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 where each philosopher is a thread and mutexes are used to prevent deadlocks.
