@@ -48,6 +48,9 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 - `make fclean` -- deletes object files and philo.
 - `make re` -- `fclean` + `make``.`
 
+- `make update` -- update the repo to its newer version.
+- `make norm` -- check 42 C norm.
+
 ##  Resources
 
 - [CodeVault](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)<br>
