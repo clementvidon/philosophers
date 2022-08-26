@@ -12,12 +12,12 @@ The code is written in accordance with The Norm (42 coding style).
 
 ##  Index
 
-**[Usage](#Usage)**<br>
-**[Resources](#Resources)**<br>
-**[Algo](#Algo)**<br>
-**[Optimization](#Optimization)**<br>
-**[Tools](#Tools)**<br>
-**[Helgrind tutor](#helgrind-tutor)**<br>
+* **[Usage](#Usage)**<br>
+* **[Resources](#Resources)**<br>
+* **[Algo](#Algo)**<br>
+* **[Optimization](#Optimization)**<br>
+* **[Tools](#Tools)**<br>
+* **[Helgrind tutor](#helgrind-tutor)**<br>
 
 ##  Usage
 
