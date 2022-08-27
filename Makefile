@@ -39,11 +39,11 @@ AV			= $(nullstring)
 all: $(NAME)
 
 san_thread: CC := gcc
-san_thread: CFLAGS := $(CFLAGS) -fsanitize=thread,undefined,signed-integer-overflow
+san_thread: CFLAGS := $(CFLAGS) -g -fsanitize=thread,undefined,signed-integer-overflow
 san_thread: $(NAME)
 
 san_addr: CC := gcc
-san_addr: CFLAGS := $(CFLAGS) -fsanitize=address,undefined,signed-integer-overflow
+san_addr: CFLAGS := $(CFLAGS) -g -fsanitize=address,undefined,signed-integer-overflow
 san_addr: $(NAME)
 
 $(NAME): $(OBJS)
