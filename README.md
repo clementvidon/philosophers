@@ -27,7 +27,7 @@ The code is written in accordance with The Norm (42 coding style).
 
 **[SUBJECT](doc/subject.md)**
 
-***Whole code is documented with docstrings*** (start from the [header](include/philo.h) file).
+***Whole code is documented with docstrings*** (start from the **[header](include/philo.h)** file).
 
 ##  Usage
 
@@ -63,8 +63,8 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 
 ##  Resources
 
-- [CodeVault](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)<br>
-- [Concurrent programming](https://begriffs.com/posts/2020-03-23-concurrent-programming.html)<br>
+- **[CodeVault](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)**<br>
+- **[Concurrent programming](https://begriffs.com/posts/2020-03-23-concurrent-programming.html)**<br>
 
 ##  Algo
 
