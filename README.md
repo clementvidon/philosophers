@@ -22,9 +22,11 @@
 
 Solution of classical synchronization problem about
 [dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
-where each philosopher is a thread and mutexes are used to prevent deadlocks. - **[detailed subject](doc/subject.md)** 
+where each philosopher is a thread and mutexes are used to prevent deadlocks.
 
 The code is written in accordance with 42 C coding style and ***all the functions are documented with docstrings*** (start from the **[header](include/philo.h)** file). 
+
+***[detailed subject](doc/subject.md)*** 
 
 ##  Usage
 
