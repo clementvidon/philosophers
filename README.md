@@ -26,7 +26,7 @@ where each philosopher is a thread and mutexes are used to prevent deadlocks.
 
 The code is written in accordance with 42 C coding style and ***all the functions are documented with docstrings*** (start from the **[header](include/philo.h)** file). 
 
-**[SUBJECT](doc/subject.md)**
+**[subject](doc/subject.md)**
 
 ##  Usage
 
