@@ -56,7 +56,7 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 - `make` -- compiles philo.
 - `make clean` -- deletes object files.
 - `make fclean` -- deletes object files and philo.
-- `make re` -- `fclean` + `make``.`
+- `make re` -- `fclean` + `make`.
 
 - `make update` -- update the repo to its newer version.
 - `make norm` -- check 42 C norm.
