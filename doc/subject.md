@@ -1,9 +1,7 @@
 
 #           SUBJECT
 
-
-Original Subject:
- **[EN](https://cdn.intra.42.fr/pdf/pdf/47562/en.subject.pdf)** / **[FR](https://cdn.intra.42.fr/pdf/pdf/47563/fr.subject.pdf)**
+[Original Subject](https://cdn.intra.42.fr/pdf/pdf/58800/en.subject.pdf)
 
 - Philosophers (at least one) sitting around a round table with pasta in the
   center.
