@@ -68,7 +68,7 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 
 ##  Algo
 
-* Philosophers
+* **Philosophers**
 
 Philosophers are **named with identifier** numbers starting at 1.
 We can cycle through each of them with the following formula:
@@ -85,7 +85,7 @@ Where `index` is equal to `philo[index]->id - 1`:
     philo[1] = 2;
     philo[2] = 3;
 
-* Forks
+* **Forks**
 
 Each philosopher uses his own fork plus his left neighbor's one:
 
@@ -104,7 +104,7 @@ To obtain the `indexes` of `philo->id`'s two forks we can use:
 
 ##  Optimization
 
-1. Locking granularity:
+1. **Locking granularity**:
 
 "The **granularity of a lock is how much data it protects**. A lock with coarse
 granularity will protect a large amount of data, and a lock with fine
@@ -132,15 +132,15 @@ of the application as the number of threads increase."
 
 *Source: Multicore Application Programming by Darryl Gove*
 
-2. [Performance Analysis with Callgrind and Cachegrind](https://www.vi-hps.org/cms/upload/material/tw10/vi-hps-tw10-KCachegrind.pdf)
+2. **[Performance Analysis with Callgrind and Cachegrind](https://www.vi-hps.org/cms/upload/material/tw10/vi-hps-tw10-KCachegrind.pdf)**
 
 ##  Tools
 
-- [philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)
+- **[philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)**
 
 ###  Memory
 
-- [ft_mallocator](https://github.com/tmatis/ft_mallocator)
+- **[ft_mallocator](https://github.com/tmatis/ft_mallocator)**
 
 > Don't forget to protect '**pthread_create**', ft_mallocator won't warn you
 > about this one.
@@ -148,19 +148,19 @@ of the application as the number of threads increase."
 > Don't forget to protect '**gettimeofday**', no malloc behind but easily
 > crash-able from the user side.
 
-- valgrind: `valgrind -q --leak-check=yes --show-leak-kinds=all`
+- **valgrind**: `valgrind -q --leak-check=yes --show-leak-kinds=all`
 
 ###  Thread
 
-- sanitizer: `-fsanitize=thread`
+- **sanitizer**: `-fsanitize=thread`
 
-- valgrind: `valgrind -q --tool=helgrind`
+- **valgrind**: `valgrind -q --tool=helgrind`
 
 ##  Helgrind tutor
 
 How to track and fix a data race?
 
-1. Output example
+1. **Output example**
 
 `DATA RACE` and `CONFLICTS` are the main terms that interest us `1>` in the
 output of helgrind, `utils.c:35` and `utils.c:40` the location of the two
@@ -188,7 +188,7 @@ with a mutex `2>`.
        ==174034==    by 0x401289: main (main.c:77)
        ==174034==  Block was alloc'd by thread #1
 
-2. Fix example<br>
+2. **Fix example**<br>
 
 At `simulator_utils.c:47` we have:
 
