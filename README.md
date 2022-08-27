@@ -24,7 +24,7 @@ Solution of classical synchronization problem about
 [dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 where each philosopher is a thread and mutexes are used to prevent deadlocks.  
 
-The code is written in accordance with 42 coding style and ***all the functions are documented with docstrings*** (start from the **[header](include/philo.h)** file). 
+The code is written in accordance with 42 C coding style and ***all the functions are documented with docstrings*** (start from the **[header](include/philo.h)** file). 
 
 **[SUBJECT](doc/subject.md)**
 
@@ -58,7 +58,7 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 - `make re` -- `fclean` + `make`.
 
 - `make update` -- update the repo to its newer version.
-- `make norm` -- check 42 C norm.
+- `make norm` -- check 42 C coding style.
 
 ##  Resources
 
