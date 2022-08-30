@@ -1,101 +1,132 @@
-# @author   cvidon@42
-# @brief    Makefile for C programs that does not require any dependency.
+# @file     Makefile
+# @brief    Simple and minimalistic Makefile for C project.
+# @author   clemedon (Clément Vidon)
 
-INC_DIR		= include
-SRC_DIR		= src
-OBJ_DIR		= obj
+NAME		:= philo
 
-SRCS		= main.c 			\
-			  checkargs.c 		\
-			  init.c 			\
-			  simulator.c 		\
-			  simulation.c 		\
-			  time_utils.c 		\
-			  simulator_utils.c	\
-			  utils.c 			\
+#------------------------------------------------#
+# INGREDIENTS                                    #
+#------------------------------------------------#
+# CC        compilers
+# CFLAGS    compiler flags
+# CPPFLAGS  preprocessor flags
+#
+# SRC_DIR   source directory
+# OBJ_DIR   object directory
+# SRCS      source files
+# OBJS      object files
 
-CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -Wconversion -Wsign-conversion
-CPPFLAGS	= -Iinclude -pthread
+CC			:= clang
+CFLAGS		:= -Wall -Wextra -Werror
+CPPFLAGS	:= -pthread -I include
+
+SRC_DIR		:= src
+OBJ_DIR		:= obj
+SRCS		:= \
+	main.c checkargs.c init.c \
+	simulator.c simulation.c \
+	time_utils.c simulator_utils.c utils.c
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-NAME		= philo
 
 #------------------------------------------------#
-#	SHELL CMDS									 #
+#   UTENSILS                                     #
 #------------------------------------------------#
+# RM        cleaning command
+# VALGRIND  valgrind command
+# HELGRIND  helgrind command
+# CLS       clear the current line
+# ECHO      print command and message prefix
+# R         set output foreground to red
+# G         set output foreground to green
+# Y         set output foreground to yellow
+# END       reset output foreground color
 
-RM			= rm -rf
-VALGRIND	= valgrind -q --leak-check=yes --show-leak-kinds=all
-HELGRIND	= valgrind -q --tool=helgrind
-AV			= $(nullstring)
+RM			:= rm -rf
+VALGRIND	:= valgrind -q --leak-check=yes --show-leak-kinds=all
+HELGRIND	:= valgrind -q --tool=helgrind
+
+CLS			:= \r\033[K
+MUTE		:= 1>/dev/null
 
 #------------------------------------------------#
 #	RECIPES										 #
 #------------------------------------------------#
+# all       build all targets
+# $(NAME)   build $(NAME) target
+# clean     remove objects
+# fclean    remove objects and binary
+# re        remove objects and binary and rebuild all
 
-.PHONY: all san_thread san_addr clean fclean re norm update malloc_test
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
-san_thread: CC := gcc
-san_thread: CFLAGS := $(CFLAGS) -g -fsanitize=thread,undefined,signed-integer-overflow
-san_thread: $(NAME)
-
-san_addr: CC := gcc
-san_addr: CFLAGS := $(CFLAGS) -g -fsanitize=address,undefined,signed-integer-overflow
-san_addr: $(NAME)
-
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) -o $(NAME)
-	@$(ECHO)"$(G)created $(END)$(NAME)\n"
+	@echo "$(CLS)$(NAME): created."
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@echo -n "$(CLS)Building $(NAME)..."
 	@[ ! -d $(@D) ] && mkdir -p  $(@D) || true
 	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-	@$(ECHO)"$(G)created $(END)$@"
 
 clean:
-	@[ -d $(OBJ_DIR) ] \
-		&& $(RM) $(OBJ_DIR) && $(ECHO)"$(R)removed$(END) $(OBJ_DIR)/\n" || true
+	@$(RM) $(OBJS)
 
 fclean: clean
-	@[ -f $(NAME) ] \
-		&& $(RM) $(NAME) && $(ECHO)"$(R)removed$(END) $(NAME)\n" || true
+	@$(RM) $(NAME)
 
 re : fclean all
 
-norm:
-	@norminette | grep -v "OK" || true
-	@$(ECHO)"$(G)checked norm$(END)\n"
+#------------------------------------------------#
+#   CUSTOM RECIPES                               #
+#------------------------------------------------#
+# sana          memory corruption debugging
+# sant          data races debugging
+# ansi          ANSI Std89 compliance
+# every         explore new warnings
+# update        update the repository
+# norm          42 C coding style compliance
+# info          standard build output
+# runv          run the program with valgrind
+# runh          run the program with helgrind
+# malloc_test   ft_mallocator external tool rule
+
+.PHONY: sana sant ansi every update norm info runv runh malloc_test
+
+sana: CC		:= gcc
+sana: CFLAGS	:= $(CFLAGS) -g -fsanitize=address,undefined,signed-integer-overflow
+sana: $(NAME)
+
+sant: CC		:= gcc
+sant: CFLAGS	:= $(CFLAGS) -g -fsanitize=thread,undefined,signed-integer-overflow
+sant: $(NAME)
+
+ansi: CFLAGS	+= -W -Wcast-qual -Wcomma -Wconversion -Wsign-conversion -Wwrite-strings -pedantic -std=c89
+ansi: all
+
+every: CFLAGS	+= -Weverything
+every: all
 
 update:
 	@git pull
 	@git submodule update --init
-	@$(ECHO)"$(G)updated$(END)\n"
+
+norm:
+	@norminette | grep -v "OK" || true
+
+info: fclean
+	@make --dry-run | grep -v "echo.*\".*\"\|\[.*\]"
+
+runv: $(NAME)
+	$(if $(param), @$(VALGRIND) ./$(NAME) $(param) || true, \
+		@echo "$(CLS)Usage: make runv param=<file_path>")
+
+runh: $(NAME)
+	$(if $(param), @$(HELGRIND) ./$(NAME) $(param) || true, \
+		@echo "$(CLS)Usage: make runh param=<file_path>")
 
 malloc_test: $(OBJS)
 	@clang -Wall -Wextra -Werror -g -fsanitize=undefined -rdynamic -o $@ $(OBJS) \
 		-Ltest/ft_mallocator -lmallocator
-
-run:
-	@./$(NAME) $(AV) || true
-valgrind_run:
-	@$(VALGRIND) ./$(NAME) $(AV) || true
-helgrind_run:
-	@$(HELGRIND) ./$(NAME) $(AV) || true
-
-#------------------------------------------------#
-#	STDOUT										 #
-#------------------------------------------------#
-
-R		= $(shell tput setaf 1)
-G		= $(shell tput setaf 2)
-Y		= $(shell tput setaf 3)
-B		= $(shell tput setaf 4)
-M		= $(shell tput setaf 5)
-C		= $(shell tput setaf 6)
-W		= $(shell tput setaf 7)
-K		= $(shell tput setaf 8)
-END		= $(shell tput sgr0)
-ECHO	= echo -n "\r\033[K$(NAME): "
