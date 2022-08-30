@@ -120,12 +120,12 @@ info: fclean
 	@make --dry-run | grep -v "echo.*\".*\"\|\[.*\]"
 
 runv: $(NAME)
-	$(if $(param), @$(VALGRIND) ./$(NAME) $(param) || true, \
-		@echo "$(CLS)Usage: make runv param=<file_path>")
+	$(if $(p), @$(VALGRIND) ./$(NAME) $(p) || true, \
+		@echo "$(CLS)Usage: make runv p=\"<params>\"")
 
 runh: $(NAME)
-	$(if $(param), @$(HELGRIND) ./$(NAME) $(param) || true, \
-		@echo "$(CLS)Usage: make runh param=<file_path>")
+	$(if $(p), @$(HELGRIND) ./$(NAME) $(p) || true, \
+		@echo "$(CLS)Usage: make runh p=\"<params>\"")
 
 malloc_test: $(OBJS)
 	@clang -Wall -Wextra -Werror -g -fsanitize=undefined -rdynamic -o $@ $(OBJS) \
