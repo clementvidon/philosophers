@@ -91,9 +91,9 @@ int	ft_init_data(t_data **data, int ac, char const *const *av)
 		(*data)->must_eat = -1;
 	if (ac == 6)
 		(*data)->must_eat = (int)ft_atol (av[5]);
-	(*data)->createko = false;
-	(*data)->done = false;
-	(*data)->died = false;
+	(*data)->createko = FALSE;
+	(*data)->done = FALSE;
+	(*data)->died = FALSE;
 	if (ft_init_data_mutexes (data))
 		return (FAILURE);
 	return (SUCCESS);

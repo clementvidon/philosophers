@@ -13,6 +13,11 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+/* portability */
+# define _DEFAULT_SOURCE
+# define _GNU_SOURCE
+# define _BSD_SOURCE
+
 /*
  ** =========[ Includes ]==========
  */
@@ -23,13 +28,15 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-# include <stdbool.h>
 # include <limits.h>
 
 /*
  ** =========[ Defines ]===========
  */
+
+/* Booleans */
+# define FALSE		0
+# define TRUE		1
 
 /* Exit codes */
 # define SUCCESS	0
@@ -71,9 +78,9 @@ typedef struct s_data
 	int				must_eat;
 
 	unsigned long	simstart;
-	bool			createko;
-	bool			done;
-	bool			died;
+	int				createko;
+	int				done;
+	int				died;
 	pthread_mutex_t	*mutex;
 
 }					t_data;
@@ -111,12 +118,14 @@ int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 
 /*
- ** simulator_utils.c
+ ** sim_utils.c
  */
 
 void			ft_print(t_philo *philo, char const *const action);
 void			ft_died(t_data *data);
 void			ft_done(t_data *data);
+int				ft_check_died(t_philo *philo);
+int				ft_check_done(t_philo *philo);
 
 /*
  ** time_utils.c
@@ -132,9 +141,9 @@ void			ft_msleep(t_philo *philo, long duration);
  ** @brief      Define each philosopher (threads) life cycle.
  */
 
-//int  			ft_start_eating(t_philo *philo);
-//int  			ft_finish_eating(t_philo *philo);
-//int  			ft_eating(t_philo *philo);
+/* int  			ft_start_eating(t_philo *philo); */
+/* int  			ft_finish_eating(t_philo *philo); */
+/* int  			ft_eating(t_philo *philo); */
 void			*ft_simulation(void *arg);
 
 /*
@@ -143,9 +152,9 @@ void			*ft_simulation(void *arg);
  ** @brief      Generate, manage and destroy the simulation required threads.
  */
 
-//void 			ft_destroy_mutexes(t_philo *philo, t_data *data)
-//bool 			ft_are_done(t_philo *philo, t_data *data)
-//int  			ft_monitor(t_philo *philo, t_data *data)
+/* void 			ft_destroy_mutexes(t_philo *philo, t_data *data) */
+/* bool 			ft_are_done(t_philo *philo, t_data *data) */
+/* int  			ft_monitor(t_philo *philo, t_data *data) */
 int				ft_simulator(t_philo *philo, t_data *data);
 
 /*
@@ -165,15 +174,15 @@ int				ft_init(t_philo **p, t_data **d, int ac, char const *const *av);
  ** @brief      Protect and make sure the user given parameters are valid.
  */
 
-//bool			ft_is_numeric(char const *str)
+/* bool			ft_is_numeric(char const *str) */
 int				ft_check_args(int ac, char const *const *argv);
 
 /*
  ** main.c
  */
 
-//void			ft_clear_memory(t_philo *philo, t_data *data)
-//bool			ft_edgecases(int ac, char const *const *argv)
+/* void			ft_clear_memory(t_philo *philo, t_data *data) */
+/* bool			ft_edgecases(int ac, char const *const *argv) */
 int				main(int ac, char const *const *argv);
 
 #endif

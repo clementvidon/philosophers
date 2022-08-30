@@ -19,7 +19,7 @@
  ** @return     True or false.
  */
 
-static bool	ft_is_numeric(char const *str)
+static int	ft_is_numeric(char const *str)
 {
 	int	i;
 
@@ -29,8 +29,8 @@ static bool	ft_is_numeric(char const *str)
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] == '\0')
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }
 
 /*
@@ -55,10 +55,16 @@ int	ft_check_args(int ac, char const *const *av)
 	}
 	while (ac-- > 1)
 	{
-		if (ft_is_numeric (av[ac]) == false)
-			return (write (2, "Error: Invalid character.\n", 29), FAILURE);
+		if (ft_is_numeric (av[ac]) == FALSE)
+		{
+			write (2, "Error: Invalid character.\n", 29);
+			return (FAILURE);
+		}
 		if (ft_atol (av[ac]) > INT_MAX || ft_atol (av[ac]) < 0)
-			return (write (2, "Error: Out of range value.\n", 27), FAILURE);
+		{
+			write (2, "Error: Out of range value.\n", 27);
+			return (FAILURE);
+		}
 	}
 	return (SUCCESS);
 }

@@ -91,15 +91,12 @@ static int	ft_eating(t_philo *philo)
 	philo->last_meal = ft_abs_time ();
 	philo->meals_counter++;
 	pthread_mutex_unlock (&philo->data->mutex[MEALS]);
-	pthread_mutex_lock (&philo->data->mutex[DONE]);
-	if (philo->data->done)
+	if (ft_check_done (philo))
 	{
-		pthread_mutex_unlock (&philo->data->mutex[DONE]);
 		ft_msleep (philo, (long)philo->data->time_eat);
 		ft_finish_eating (philo);
 		return (FAILURE);
 	}
-	pthread_mutex_unlock (&philo->data->mutex[DONE]);
 	ft_msleep (philo, (long)philo->data->time_eat);
 	ft_finish_eating (philo);
 	return (SUCCESS);
@@ -108,7 +105,7 @@ static int	ft_eating(t_philo *philo)
 /*
  ** @brief      Philosopher's life cycle.
  **
- ** Odd philosophers are delayed to prevent any conflict during the forks taking
+ ** Even philosophers are delayed to prevent any conflict during the forks taking
  ** moment.
  **
  ** @param[in]  arg the simulation's struct.
@@ -118,27 +115,23 @@ static int	ft_eating(t_philo *philo)
 void	*ft_simulation(void *arg)
 {
 	t_philo	*philo;
-	t_data	*data;
 
 	philo = (t_philo *) arg;
-	data = philo->data;
 	if (philo->id % 2 == 0)
 	{
 		ft_print (philo, "is thinking");
-		ft_msleep (philo, (long)data->time_eat);
+		ft_msleep (philo, (long)philo->data->time_eat);
 	}
 	while (1)
 	{
-		if (data->createko)
+		if (philo->data->createko)
 			break ;
-		pthread_mutex_lock (&philo->data->mutex[DIED]);
-		if (philo->data->died)
-			return (pthread_mutex_unlock (&philo->data->mutex[DIED]), NULL);
-		pthread_mutex_unlock (&philo->data->mutex[DIED]);
+		if (ft_check_died(philo))
+			break ;
 		if (ft_eating (philo) != SUCCESS)
 			break ;
 		ft_print (philo, "is sleeping");
-		ft_msleep (philo, (long)data->time_slp);
+		ft_msleep (philo, (long)philo->data->time_slp);
 		ft_print (philo, "is thinking");
 	}
 	return (NULL);

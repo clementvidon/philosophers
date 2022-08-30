@@ -25,7 +25,7 @@ OBJ_DIR		:= obj
 SRCS		:= \
 	main.c checkargs.c init.c \
 	simulator.c simulation.c \
-	time_utils.c simulator_utils.c utils.c
+	time_utils.c sim_utils.c utils.c
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

@@ -26,7 +26,7 @@ unsigned long	ft_abs_time(void)
 
 	if (gettimeofday (&time, NULL) == -1)
 	{
-		dprintf (2, "Error: 'gettimeofday' fail.\n");
+		write (2, "Error: 'gettimeofday' fail.\n", 28);
 		return (FAILURE);
 	}
 	s = (unsigned long)(time.tv_sec * 1000);
@@ -77,13 +77,7 @@ void	ft_msleep(t_philo *philo, long duration)
 			usleep (100);
 		else
 			usleep ((unsigned int)((duration - current) / 10));
-		pthread_mutex_lock (&philo->data->mutex[DIED]);
-		if (philo->data->died)
-			return ((void)pthread_mutex_unlock (&philo->data->mutex[DIED]));
-		pthread_mutex_unlock (&philo->data->mutex[DIED]);
-		pthread_mutex_lock (&philo->data->mutex[DONE]);
-		if (philo->data->done)
-			return ((void)pthread_mutex_unlock (&philo->data->mutex[DONE]));
-		pthread_mutex_unlock (&philo->data->mutex[DONE]);
+		if (ft_check_done (philo) || ft_check_died (philo))
+			return ;
 	}
 }

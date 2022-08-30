@@ -42,13 +42,13 @@ static void	ft_clear_memory(t_philo *philo, t_data *data)
  ** @return     1 if there are no matching edge case, otherwise 0.
  */
 
-static bool	ft_edgecases(int ac, char const *const *av)
+static int	ft_edgecases(int ac, char const *const *av)
 {
 	if ((ac == 6 && ft_atol (av[5]) == 0))
-		return (true);
+		return (TRUE);
 	if (ft_atol (av[1]) == 0)
-		return (true);
-	return (false);
+		return (TRUE);
+	return (FALSE);
 }
 
 /*
@@ -71,12 +71,12 @@ int	main(int ac, char const *const *av)
 	data = NULL;
 	philo = NULL;
 	if (ft_check_args (ac, av) != SUCCESS)
-		return (ft_clear_memory (philo, data), EXIT_FAILURE);
+		return ((void)ft_clear_memory (philo, data), EXIT_FAILURE);
 	if (ft_edgecases (ac, av))
-		return (ft_clear_memory (philo, data), EXIT_SUCCESS);
+		return ((void)ft_clear_memory (philo, data), EXIT_SUCCESS);
 	if (ft_init (&philo, &data, ac, av) != SUCCESS)
-		return (ft_clear_memory (philo, data), EXIT_FAILURE);
+		return ((void)ft_clear_memory (philo, data), EXIT_FAILURE);
 	if (ft_simulator (philo, data) != SUCCESS)
-		return (ft_clear_memory (philo, data), EXIT_FAILURE);
-	return (ft_clear_memory (philo, data), EXIT_SUCCESS);
+		return ((void)ft_clear_memory (philo, data), EXIT_FAILURE);
+	return ((void)ft_clear_memory (philo, data), EXIT_SUCCESS);
 }

@@ -39,14 +39,14 @@ static void	ft_destroy_mutexes(t_philo *philo, t_data *data)
  ** @return     True or false.
  */
 
-static bool	ft_are_done(t_philo *philo, t_data *data)
+static int	ft_are_done(t_philo *philo, t_data *data)
 {
 	int	i;
 	int	done;
 	int	meals_count;
 
 	if (data->must_eat == -1)
-		return (false);
+		return (FALSE);
 	i = -1;
 	done = -1;
 	while (++i < data->philo_nb)
@@ -56,9 +56,9 @@ static bool	ft_are_done(t_philo *philo, t_data *data)
 		pthread_mutex_unlock (&philo->data->mutex[MEALS]);
 		if (meals_count >= data->must_eat)
 			if (++done == data->philo_nb - 1)
-				return (true);
+				return (TRUE);
 	}
-	return (false);
+	return (FALSE);
 }
 
 /*
@@ -126,14 +126,16 @@ int	ft_simulator(t_philo *philo, t_data *data)
 			data->createko = 1;
 			while (i--)
 				pthread_join (threads[i], NULL);
-			return (free (threads), FAILURE);
+			return ((void)free (threads), FAILURE);
 		}
 	}
 	if (ft_monitor (philo, data) != SUCCESS)
-		return (ft_destroy_mutexes (philo, data), free (threads), FAILURE);
+		return ((void)ft_destroy_mutexes (philo, data), (void)free (threads),
+				FAILURE);
 	i = -1;
 	while (++i < data->philo_nb)
 		if (pthread_join (threads[i], NULL))
 			return (FAILURE);
-	return (ft_destroy_mutexes (philo, data), free (threads), SUCCESS);
+	return ((void)ft_destroy_mutexes (philo, data), (void)free (threads),
+			SUCCESS);
 }
