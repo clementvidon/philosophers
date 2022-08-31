@@ -28,6 +28,8 @@ The code is written in accordance with **42 C** coding style,  **ANSI C89** comp
 
 * ***[detailed subject](doc/subject.md)*** 
 
+External functions: `printf`, `malloc`, `free`, `write`, `usleep`, `gettimeofday`, `pthread_create`, `pthread_join`, `pthread_mutex_init`, `pthread_mutex_destroy`, `pthread_mutex_lock`, `pthread_mutex_unlock`
+
 ##  Usage
 
 Run `make` in the root of the projet and launch as follows:
