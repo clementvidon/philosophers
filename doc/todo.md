@@ -31,6 +31,10 @@ avec t_death = 3 fois t_eat
 
 ##  Issues
 
+TODO
+- check the forks init (dont give all forks to all philos)
+- function for duplicate of variable checking using mutex
+
 1. Death after eat / print after death: After a death, some actions are printed
 from other philos or the dead philo himself.  Occasionally happens with extreme
 parameters like:

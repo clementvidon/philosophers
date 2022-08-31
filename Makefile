@@ -84,7 +84,7 @@ re : fclean all
 #------------------------------------------------#
 # sana          memory corruption debugging
 # sant          data races debugging
-# ansi          ANSI Std89 compliance
+# ansi          ANSI c89 compliance
 # every         explore new warnings
 # update        update the repository
 # norm          42 C coding style compliance
