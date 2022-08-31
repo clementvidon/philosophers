@@ -24,11 +24,11 @@ Solution of classical synchronization problem about
 [dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 where each philosopher is a thread and mutexes are used to prevent deadlocks.
 
-The code is written in accordance with **42 C** coding style,  **ANSI C89** compliant and entirely **documented with docstrings**.
-
 * ***[detailed subject](doc/subject.md)*** 
 
 External functions: `printf`, `malloc`, `free`, `write`, `usleep`, `gettimeofday`, `pthread_create`, `pthread_join`, `pthread_mutex_init`, `pthread_mutex_destroy`, `pthread_mutex_lock`, `pthread_mutex_unlock`
+
+Code written in accordance with **42 C** coding style,  **ANSI C89** compliant and entirely **documented with docstrings**.
 
 ##  Usage
 
