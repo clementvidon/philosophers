@@ -54,29 +54,25 @@ Example of a dinner that should never stop:
                   +---|-- time_eat
                       +-- time_slp
 
-- For **even** `philo_nb` value the minimum `time_die` is:
+- Minimum **`time_die`** for an **EVEN `philo_nb`**:
 
-    **2 x time_eat + m**
+```
+	2 x time_eat + m
+```
 
-    ./philo 2 201 100 100
+- Minimum **`time_die`** for an **ODD `philo_nb`**:
 
-- For **odd** `philo_nb` value the minimum `time_die` is:
+```
+if time_eat <= time_slp
 
-If `time_eat <= time_slp`
+	2 * (time_eat + time_slp) + m
 
-    **2 * (time_eat + time_slp) + m**
+if time_eat > time_slp
 
-    ./philo 3 150 1  99
-    ./philo 3 150 50 50
+	3 * time_eat + m
+```
 
-If `time_eat > time_slp` then `time_die` must be:
-
-    **3 * time_eat**
-
-    ./philo 3 297 99 1
-    ./philo 3 150 50 1
-
-Where `m` is a margin of error of 1 or 2ms.
+*Where `m` is a margin of error of 1 or 2ms.*
 
 - If a number of meals is not specified the simulation stops at the death of any
 philosophers.
