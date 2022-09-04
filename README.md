@@ -3,17 +3,19 @@
 </h1>
 
 <h3 align="center">
-	<a href="#Summary">Summary</a>
+	<a href="#summary">Summary</a>
 	<span> · </span>
-	<a href="#Usage">Usage</a>
+	<a href="#usage">Usage</a>
 	<span> · </span>
-	<a href="#Resources">Resources</a>
+	<a href="#tester">Tester</a>
 	<span> · </span>
-	<a href="#Algo">Algo</a>
+	<a href="#resources">Resources</a>
 	<span> · </span>
-	<a href="#Optimization">Optimization</a>
+	<a href="#algo">Algo</a>
 	<span> · </span>
-	<a href="#Tools">Tools</a>
+	<a href="#optimization">Optimization</a>
+	<span> · </span>
+	<a href="#tools">Tools</a>
 	<span> · </span>
 	<a href="#helgrind-tutor">Helgrind tutor</a>
 </h3>
@@ -24,7 +26,7 @@ Solution of classical synchronization problem about
 [dining philosophers](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
 where each philosopher is a thread and mutexes are used to prevent deadlocks.
 
-* ***[detailed subject](doc/subject.md)*** 
+* ***[detailed subject](doc/subject.md)***
 
 External functions: `printf`, `malloc`, `free`, `write`, `usleep`, `gettimeofday`, `pthread_create`, `pthread_join`, `pthread_mutex_init`, `pthread_mutex_destroy`, `pthread_mutex_lock`, `pthread_mutex_unlock`
 
@@ -58,6 +60,21 @@ A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
 - `make clean` -- deletes object files.
 - `make fclean` -- deletes object files and philo.
 - `make re` -- `fclean` + `make`.
+
+##  Tester
+
+The tester will run specified test 5 times:
+1. with helgrind
+2. with valgrind
+3. with sanitizer=address
+4. with sanitizer=thread
+5. with nothing
+
+The first test will run all the tests from the evaluation scripts 5 times:
+`make test_eval`
+
+The second test will run the test of your choice 5 times:
+`make test_custom p="<philosophers_arguments>"`
 
 ##  Resources
 

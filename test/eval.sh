@@ -40,7 +40,7 @@ valgrind_run()
     echo "========================================="
     echo "===============[valgrind run]============"
     echo "========================================="
-    MAKE="make re runv"
+    MAKE="make --no-print-directory re runv"
 
     p="1 800 200 200"
     echo " > philo " $p
@@ -73,7 +73,7 @@ san_thread()
     echo "========================================="
     echo "===============[san thread]=============="
     echo "========================================="
-    MAKE="make fclean sant run"
+    MAKE="make --no-print-directory sant run"
 
     p="1 800 200 200"
     echo " > philo " $p
@@ -106,7 +106,7 @@ san_addr()
     echo "========================================="
     echo "===============[san addr]================"
     echo "========================================="
-    MAKE="make fclean sana run"
+    MAKE="make --no-print-directory sana run"
 
     p="1 800 200 200"
     echo " > philo " $p
@@ -139,7 +139,7 @@ run()
     echo "========================================="
     echo "===============[run]====================="
     echo "========================================="
-    MAKE="make run"
+    MAKE="make --no-print-directory run"
 
     p="1 800 200 200"
     echo " > philo " $p
