@@ -7,7 +7,7 @@ helgrind_run()
     echo "========================================="
     echo "===============[helgrind run]============"
     echo "========================================="
-    MAKE="make re runv"
+    MAKE="make --no-print-directory re runv"
 
     p="1 800 200 200"
     echo " > philo " $p

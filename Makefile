@@ -132,11 +132,10 @@ run: $(NAME)
 		@echo "$(CLS)Usage: make run p=\"<params>\"")
 
 test_eval: $(NAME)
-	$(if $(p), -@$(HELGRIND) ./$(NAME) $(p), \
-		@echo "$(CLS)Usage: make runh p=\"<params>\"")
+	-@bash test/eval.sh
 
 test_custom: $(NAME)
-	$(if $(p), -@$(HELGRIND) ./$(NAME) $(p), \
+	$(if $(p), -@bash test/custom.sh $(p), \
 		@echo "$(CLS)Usage: make runh p=\"<params>\"")
 
 malloc_test: $(OBJS)

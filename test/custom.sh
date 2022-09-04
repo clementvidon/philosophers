@@ -7,24 +7,24 @@ p=$1
 echo "========================================="
 echo "===============[helgrind run]============"
 echo "========================================="
-make re runh p="$p";
+make --no-print-directory re runh p="$p";
 
 echo "========================================="
 echo "===============[valgrind run]============"
 echo "========================================="
-make re runv p="$p";
+make --no-print-directory re runv p="$p";
 
 echo "========================================="
 echo "===============[san thread]=============="
 echo "========================================="
-make fclean sant run p="$p";
+make --no-print-directory fclean sant run p="$p";
 
 echo "========================================="
 echo "===============[san addr]================"
 echo "========================================="
-make fclean sana run p="$p";
+make --no-print-directory fclean sana run p="$p";
 
 echo "========================================="
 echo "===============[make run]================"
 echo "========================================="
-make re run p="$p";
+make --no-print-directory re run p="$p";
