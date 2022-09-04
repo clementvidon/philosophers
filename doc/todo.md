@@ -46,6 +46,11 @@ parameters like:
 - `./philo 3 399 100 100` -> KO (death)
 - `./philo 3 400 100 100` -> OK
 
+
+
+
+
+
     while (true); do ./philo 100 410 200 200 > /tmp/out && tail -2 /tmp/out |tee -a out && echo "" |tee -a out; done
 
 - `./philo 200 400 100 100`

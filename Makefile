@@ -120,11 +120,23 @@ info: fclean
 	@make --dry-run | grep -v "echo.*\".*\"\|\[.*\]"
 
 runv: $(NAME)
-	$(if $(p), @$(VALGRIND) ./$(NAME) $(p) || true, \
+	$(if $(p), -@$(VALGRIND) ./$(NAME) $(p), \
 		@echo "$(CLS)Usage: make runv p=\"<params>\"")
 
 runh: $(NAME)
-	$(if $(p), @$(HELGRIND) ./$(NAME) $(p) || true, \
+	$(if $(p), -@$(HELGRIND) ./$(NAME) $(p), \
+		@echo "$(CLS)Usage: make runh p=\"<params>\"")
+
+run: $(NAME)
+	$(if $(p), -./$(NAME) $(p), \
+		@echo "$(CLS)Usage: make run p=\"<params>\"")
+
+test_eval: $(NAME)
+	$(if $(p), -@$(HELGRIND) ./$(NAME) $(p), \
+		@echo "$(CLS)Usage: make runh p=\"<params>\"")
+
+test_custom: $(NAME)
+	$(if $(p), -@$(HELGRIND) ./$(NAME) $(p), \
 		@echo "$(CLS)Usage: make runh p=\"<params>\"")
 
 malloc_test: $(OBJS)

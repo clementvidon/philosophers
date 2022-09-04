@@ -57,7 +57,7 @@ int	ft_check_args(int ac, char const *const *av)
 	{
 		if (ft_is_numeric (av[ac]) == FALSE)
 		{
-			write (2, "Error: Invalid character.\n", 29);
+			write (2, "Error: Invalid character.\n", 26);
 			return (FAILURE);
 		}
 		if (ft_atol (av[ac]) > INT_MAX || ft_atol (av[ac]) < 0)

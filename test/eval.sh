@@ -7,32 +7,32 @@ helgrind_run()
     echo "========================================="
     echo "===============[helgrind run]============"
     echo "========================================="
-    MAKE="make re helgrind_run"
+    MAKE="make re runv"
 
-    AV="1 800 200 200"
-    echo " > philo " $AV
+    p="1 800 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="5 800 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="5 800 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 310 200 100"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 310 200 100"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 310 200 200"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 310 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
+    $MAKE p="$p";
 }
 
 valgrind_run()
@@ -40,32 +40,32 @@ valgrind_run()
     echo "========================================="
     echo "===============[valgrind run]============"
     echo "========================================="
-    MAKE="make re valgrind_run"
+    MAKE="make re runv"
 
-    AV="1 800 200 200"
-    echo " > philo " $AV
+    p="1 800 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="5 800 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="5 800 200 200 7"
+    echo " > philo " $p
     sleep 0.5
-    $MAKE AV="$AV";
-    AV="4 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 310 200 100"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 310 200 100"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 310 200 200"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 310 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
+    $MAKE p="$p";
 }
 
 san_thread()
@@ -73,32 +73,32 @@ san_thread()
     echo "========================================="
     echo "===============[san thread]=============="
     echo "========================================="
-    MAKE="make fclean san_thread run"
+    MAKE="make fclean sant run"
 
-    AV="1 800 200 200"
-    echo " > philo " $AV
+    p="1 800 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="5 800 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="5 800 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 310 200 100"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 310 200 100"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 310 200 200"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 310 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
+    $MAKE p="$p";
 }
 
 san_addr()
@@ -106,32 +106,32 @@ san_addr()
     echo "========================================="
     echo "===============[san addr]================"
     echo "========================================="
-    MAKE="make fclean san_addr run"
+    MAKE="make fclean sana run"
 
-    AV="1 800 200 200"
-    echo " > philo " $AV
+    p="1 800 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="5 800 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="5 800 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 310 200 100"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 310 200 100"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 310 200 200"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 310 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
+    $MAKE p="$p";
 }
 
 run()
@@ -141,30 +141,30 @@ run()
     echo "========================================="
     MAKE="make run"
 
-    AV="1 800 200 200"
-    echo " > philo " $AV
+    p="1 800 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="5 800 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="5 800 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="4 310 200 100"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="4 310 200 100"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 410 200 200 7"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 410 200 200 7"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
-    AV="2 310 200 200"
-    echo " > philo " $AV
+    $MAKE p="$p";
+    p="2 310 200 200"
+    echo " > philo " $p
     sleep 1
-    $MAKE AV="$AV";
+    $MAKE p="$p";
 }
 
 helgrind_run;
