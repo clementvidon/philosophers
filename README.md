@@ -46,13 +46,43 @@ Run `make` in the root of the projet and launch as follows:
 - `must_eat` -- (optional) simulation stops if all philosophers ate at least such
   amount of times.
 
-For example with `./philo 4 410 200 200` the dinner should never stop.
+Example of a dinner that should never stop:
 
-If a number of meals is not specified the simulation stops at the death of any
+    ./philo 4 410 200 200
+            +-|---|---|-- philo_nb
+              +---|---|-- time_die
+                  +---|-- time_eat
+                      +-- time_slp
+
+- For **even** `philo_nb` value the minimum `time_die` is:
+
+    **2 x time_eat + m**
+
+    ./philo 2 201 100 100
+
+- For **odd** `philo_nb` value the minimum `time_die` is:
+
+If `time_eat <= time_slp`
+
+    **2 * (time_eat + time_slp) + m**
+
+    ./philo 3 150 1  99
+    ./philo 3 150 50 50
+
+If `time_eat > time_slp` then `time_die` must be:
+
+    **3 * time_eat**
+
+    ./philo 3 297 99 1
+    ./philo 3 150 50 1
+
+Where `m` is a margin of error of 1 or 2ms.
+
+- If a number of meals is not specified the simulation stops at the death of any
 philosophers.
 
-A `number_of_philosophers` > 200 and `time_to_die`/`time_to_eat`/`time_to_sleep`
-< 60 ms may cause undefined behavior.
+- A `number_of_philosophers` > 200 and a `time_to` param < 60 ms may cause
+undefined behavior.
 
 ***Makefile rules***
 
