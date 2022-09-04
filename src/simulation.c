@@ -117,35 +117,31 @@ void	*ft_simulation(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
-	if (philo->id % 2 == 0)
-	{
-		ft_print (philo, "is thinking");
-		ft_msleep (philo, (long)philo->data->time_eat);
-	}
+	/* if (philo->id % 2 == 0) */
+	/* { */
+	/* 	ft_print (philo, "is thinking"); */
+	/* 	ft_msleep (philo, (long)philo->data->time_eat); */
+	/* } */
 	while (1)
 	{
-		ft_print (philo, "is thinking");
-
-		// drastically improve 3 610 200 200
-		// TODO dig
-		if (philo->id % 2 == 0)
-			usleep (50);
-
 		if (philo->data->createko)
 			break ;
 
-		// ??? useless ???
 		if (ft_check_died(philo))
 			break ;
 
 		if (ft_eating (philo) != SUCCESS)
 			break ;
 
-		// LESS MUTEXES
-		// Si msleep et print return une valeur en cas de done/mort alors on
-		// peut exit sans checker de nouveaux.
 		ft_print (philo, "is sleeping");
 		ft_msleep (philo, (long)philo->data->time_slp);
+
+		ft_print (philo, "is thinking");
+		if (philo->data->time_slp < philo->data->time_eat)
+			ft_msleep(philo, (philo->data->time_eat - philo->data->time_slp) + 1);
+		else
+			ft_msleep(philo, 1);
+
 	}
 	return (NULL);
 }
