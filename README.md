@@ -54,13 +54,13 @@ Example of a dinner that should never stop:
                   +---|-- time_eat
                       +-- time_slp
 
-- Minimum **`time_die`** for an **EVEN `philo_nb`**:
+- **Minimum `time_die` for an EVEN `philo_nb`**:
 
 ```
 	2 x time_eat + m
 ```
 
-- Minimum **`time_die`** for an **ODD `philo_nb`**:
+- **Minimum `time_die` for an ODD `philo_nb`**:
 
 ```
 if time_eat <= time_slp
