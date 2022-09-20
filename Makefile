@@ -1,143 +1,137 @@
-# @file     Makefile
-# @brief    Simple and minimalistic Makefile for C project.
 # @author   clemedon (Clément Vidon)
+####################################### BEG_3 ####
 
 NAME		:= philo
 
 #------------------------------------------------#
-# INGREDIENTS                                    #
+#   INGREDIENTS                                  #
 #------------------------------------------------#
-# CC        compilers
-# CFLAGS    compiler flags
-# CPPFLAGS  preprocessor flags
-#
 # SRC_DIR   source directory
 # OBJ_DIR   object directory
 # SRCS      source files
 # OBJS      object files
+#
+# CC        compiler
+# CFLAGS    compiler flags
+# CPPFLAGS  preprocessor flags
 
-CC			:= clang
-CFLAGS		:= -Wall -Wextra -Werror
-CPPFLAGS	:= -pthread -I include
-
-SRC_DIR		:= src
-OBJ_DIR		:= obj
+SRC_DIR     := src
+OBJ_DIR     := obj
 SRCS		:= \
-	main.c checkargs.c init.c \
-	simulator.c simulation.c \
-	time_utils.c sim_utils.c utils.c
-SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
-OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+	main.c       \
+	checkargs.c  \
+	init.c       \
+	simulator.c  \
+	simulation.c \
+	time_utils.c \
+	sim_utils.c  \
+	utils.c
+SRCS        := $(SRCS:%=$(SRC_DIR)/%)
+OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+CC          := clang
+CFLAGS      := -Wall -Wextra -Werror
+CPPFLAGS    := -I include
+LDLIBS      := -lpthread
 
 #------------------------------------------------#
 #   UTENSILS                                     #
 #------------------------------------------------#
-# RM        cleaning command
+# RM        force remove
+# MAKE      quietly make
+# DIR_DUP   duplicate directory tree
 # VALGRIND  valgrind command
 # HELGRIND  helgrind command
-# CLS       clear the current line
-# ECHO      print command and message prefix
-# R         set output foreground to red
-# G         set output foreground to green
-# Y         set output foreground to yellow
-# END       reset output foreground color
 
-RM			:= rm -rf
-VALGRIND	:= valgrind -q --leak-check=yes --show-leak-kinds=all
-HELGRIND	:= valgrind -q --tool=helgrind
-
-CLS			:= \r\033[K
-MUTE		:= 1>/dev/null
+RM          := rm -f
+MAKE        := $(MAKE) --no-print-directory
+DIR_DUP     = mkdir -p $(@D)
+VALGRIND    := valgrind -q --leak-check=yes --show-leak-kinds=all
+HELGRIND    := valgrind -q --tool=helgrind
+CLS         := \r\033[K
 
 #------------------------------------------------#
-#	RECIPES										 #
+#   RECIPES                                      #
 #------------------------------------------------#
-# all       build all targets
-# $(NAME)   build $(NAME) target
-# clean     remove objects
-# fclean    remove objects and binary
-# re        remove objects and binary and rebuild all
-
-.PHONY: all clean fclean re
+# all       default goal
+# $(NAME)   linking .o -> binary
+# %.o       compilation .c -> .o
+# clean     remove .o
+# fclean    remove .o + binary
+# re        remake default goal
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(OBJS) -o $(NAME)
-	@echo "$(CLS)$(NAME): created."
+	$(CC) $^ $(LDLIBS) -o $@
+	$(info CREATED $@)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@echo -n "$(CLS)Building $(NAME)..."
-	@[ ! -d $(@D) ] && mkdir -p  $(@D) || true
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(DIR_DUP)
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(info CREATED $@)
 
 clean:
-	@$(RM) $(OBJS)
+	$(RM) $(OBJS)
 
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
 
-re : fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
-#------------------------------------------------#
-#   CUSTOM RECIPES                               #
-#------------------------------------------------#
-# sana          memory corruption debugging
-# sant          data races debugging
-# ansi          ANSI c89 compliance
-# every         explore new warnings
-# update        update the repository
-# norm          42 C coding style compliance
-# info          standard build output
-# runv          run the program with valgrind
-# runh          run the program with helgrind
-# malloc_test   ft_mallocator external tool rule
+norm:
+	norminette | grep -v "OK" || true
 
-.PHONY: sana sant ansi every update norm info runv runh malloc_test
+update:
+	git stash
+	git pull
+	git submodule update --init
+	git stash pop
 
-sana: CC		:= gcc
-sana: CFLAGS	:= $(CFLAGS) -g -fsanitize=address,undefined,signed-integer-overflow
-sana: $(NAME)
+sana: CFLAGS	+= -O0 -g3 -fsanitize=address,undefined,integer -fno-optimize-sibling-calls
+sana: LDFLAGS	+= -g3 -fsanitize=address,undefined,integer
+sana: all
 
-sant: CC		:= gcc
-sant: CFLAGS	:= $(CFLAGS) -g -fsanitize=thread,undefined,signed-integer-overflow
-sant: $(NAME)
+sant: CFLAGS	+= -O0 -g3 -fsanitize=thread,undefined,integer -fno-optimize-sibling-calls
+sant: LDFLAGS	+= -g3 -fsanitize=thread,undefined,integer
+sant: all
 
-ansi: CFLAGS	+= -W -Wcast-qual -Wcomma -Wconversion -Wsign-conversion -Wwrite-strings -pedantic -std=c89
+ansi: CFLAGS	+= -W -pedantic -std=c89
 ansi: all
 
 every: CFLAGS	+= -Weverything
 every: all
 
-update:
-	@git pull
-	@git submodule update --init
-
-norm:
-	@norminette | grep -v "OK" || true
-
-info: fclean
-	@make --dry-run | grep -v "echo.*\".*\"\|\[.*\]"
-
 runv: $(NAME)
-	$(if $(p), -@$(VALGRIND) ./$(NAME) $(p), \
-		@echo "$(CLS)Usage: make runv p=\"<params>\"")
+	$(if $(p), -$(VALGRIND) ./$(NAME) $(p), \
+		echo "$(CLS)Usage: make runv p=\"<params>\"")
 
 runh: $(NAME)
-	$(if $(p), -@$(HELGRIND) ./$(NAME) $(p), \
-		@echo "$(CLS)Usage: make runh p=\"<params>\"")
+	$(if $(p), -$(HELGRIND) ./$(NAME) $(p), \
+		echo "$(CLS)Usage: make runh p=\"<params>\"")
 
 run: $(NAME)
 	$(if $(p), -./$(NAME) $(p), \
-		@echo "$(CLS)Usage: make run p=\"<params>\"")
+		echo "$(CLS)Usage: make run p=\"<params>\"")
 
 test_eval: $(NAME)
-	-@bash test/eval.sh
+	-bash test/eval.sh
 
 test_custom: $(NAME)
-	$(if $(p), -@bash test/custom.sh $(p), \
-		@echo "$(CLS)Usage: make runh p=\"<params>\"")
+	$(if $(p), -bash test/custom.sh $(p), \
+		echo "$(CLS)Usage: make runh p=\"<params>\"")
 
 malloc_test: $(OBJS)
-	@clang -Wall -Wextra -Werror -g -fsanitize=undefined -rdynamic -o $@ $(OBJS) \
+	clang -Wall -Wextra -Werror -g -fsanitize=undefined -rdynamic -o $@ $(OBJS) \
 		-Ltest/ft_mallocator -lmallocator
+
+#------------------------------------------------#
+#   SPEC                                         #
+#------------------------------------------------#
+
+.PHONY: runv runh run test_eval test_custom malloc_test
+.SILENT:
+
+####################################### END_3 ####
