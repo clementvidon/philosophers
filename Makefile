@@ -63,7 +63,7 @@ CLS         := \r\033[K
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $^ $(LDLIBS) -o $@
+	$(CC) $(OBJS) $(LDLIBS) -o $(NAME)
 	$(info CREATED $@)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -90,18 +90,18 @@ update:
 	git submodule update --init
 	git stash pop
 
-sana: CFLAGS	+= -O0 -g3 -fsanitize=address,undefined,integer -fno-optimize-sibling-calls
-sana: LDFLAGS	+= -g3 -fsanitize=address,undefined,integer
+sana: CFLAGS    += -O0 -g3 -fsanitize=address,undefined,integer -fno-optimize-sibling-calls
+sana: LDFLAGS   += -g3 -fsanitize=address,undefined,integer
 sana: all
 
-sant: CFLAGS	+= -O0 -g3 -fsanitize=thread,undefined,integer -fno-optimize-sibling-calls
-sant: LDFLAGS	+= -g3 -fsanitize=thread,undefined,integer
+sant: CFLAGS    += -O0 -g3 -fsanitize=thread,undefined,integer -fno-optimize-sibling-calls
+sant: LDFLAGS   += -g3 -fsanitize=thread,undefined,integer
 sant: all
 
-ansi: CFLAGS	+= -W -pedantic -std=c89
+ansi: CFLAGS    += -W -pedantic -std=c89
 ansi: all
 
-every: CFLAGS	+= -Weverything
+every: CFLAGS   += -Weverything
 every: all
 
 runv: $(NAME)
