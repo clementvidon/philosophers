@@ -90,13 +90,13 @@ update:
 	git submodule update --init
 	git stash pop
 
-sana: CFLAGS    += -O0 -g3 -fsanitize=address,undefined,integer -fno-optimize-sibling-calls
-sana: LDFLAGS   += -g3 -fsanitize=address,undefined,integer
-sana: all
+asan: CFLAGS    += -O0 -g3 -fsanitize=address,undefined,integer -fno-optimize-sibling-calls
+asan: LDFLAGS   += -g3 -fsanitize=address,undefined,integer
+asan: all
 
-sant: CFLAGS    += -O0 -g3 -fsanitize=thread,undefined,integer -fno-optimize-sibling-calls
-sant: LDFLAGS   += -g3 -fsanitize=thread,undefined,integer
-sant: all
+tsan: CFLAGS    += -O0 -g3 -fsanitize=thread,undefined,integer -fno-optimize-sibling-calls
+tsan: LDFLAGS   += -g3 -fsanitize=thread,undefined,integer
+tsan: all
 
 ansi: CFLAGS    += -W -pedantic -std=c89
 ansi: all
