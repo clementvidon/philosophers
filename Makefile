@@ -104,11 +104,11 @@ ansi: all
 every: CFLAGS   += -Weverything
 every: all
 
-runv: $(NAME)
+vrun: $(NAME)
 	$(if $(p), -$(VALGRIND) ./$(NAME) $(p), \
 		echo "$(CLS)Usage: make runv p=\"<params>\"")
 
-runh: $(NAME)
+hrun: $(NAME)
 	$(if $(p), -$(HELGRIND) ./$(NAME) $(p), \
 		echo "$(CLS)Usage: make runh p=\"<params>\"")
 
