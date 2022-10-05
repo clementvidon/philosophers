@@ -123,7 +123,6 @@ int	ft_simulator(t_philo *philo, t_data *data)
 	{
 		if (pthread_create (&threads[i], 0, ft_simulation, (void *)&philo[i]))
 		{
-			data->createko = 1;
 			while (i--)
 				pthread_join (threads[i], NULL);
 			return ((void)free (threads), FAILURE);

@@ -3,7 +3,10 @@
 
 ## Todo
 
-Optimize: `./philo 100 410 200 200`
+Optimize: `./philo 100 410 200 200` (school)
+Optimize: `./philo 150 410 200 200` (home)
+Optimize: `make && valgrind -q --tool=helgrind ./philo 4 410 200 200`
+
 Fork taking conflict: `./philo 3 200 100 100`
 
 ##  Tests

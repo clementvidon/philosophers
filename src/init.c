@@ -87,11 +87,13 @@ int	ft_init_data(t_data **data, int ac, char const *const *av)
 	(*data)->time_die = (int)ft_atol (av[2]);
 	(*data)->time_eat = (int)ft_atol (av[3]);
 	(*data)->time_slp = (int)ft_atol (av[4]);
+	(*data)->time_thk = 1;
+	if ((*data)->time_slp < (*data)->time_eat)
+		(*data)->time_thk += ((*data)->time_eat - (*data)->time_slp);
 	if (ac == 5)
 		(*data)->must_eat = -1;
 	if (ac == 6)
 		(*data)->must_eat = (int)ft_atol (av[5]);
-	(*data)->createko = FALSE;
 	(*data)->done = FALSE;
 	(*data)->died = FALSE;
 	if (ft_init_data_mutexes (data))

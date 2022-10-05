@@ -31,23 +31,36 @@
 # include <limits.h>
 
 /*
- ** =========[ Defines ]===========
+ ** =========[ Enum ]==============
  */
 
+/* Simulator's mutexes */
+
+typedef enum e_mutexes
+{
+	PRINT,
+	MEALS,
+	DONE,
+	DIED,
+	M_NUM
+}	t_mutexes;
+
+
 /* Booleans */
-# define FALSE		0
-# define TRUE		1
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
 
 /* Exit codes */
-# define SUCCESS	0
-# define FAILURE	1
 
-/* Simulator's mutexes */
-# define M_NUM		4
-# define PRINT		0
-# define MEALS		1
-# define DONE		2
-# define DIED		3
+typedef enum e_exit
+{
+	SUCCESS,
+	FAILURE
+}	t_exit;
 
 /*
  ** =========[ Structures ]========
@@ -60,10 +73,10 @@
  ** @var        time_die the philosophers time to die (in ms).
  ** @var        time_eat the philosophers time to eat (in ms).
  ** @var        time_slp the philosophers time to sleep (in ms).
+ ** @var        time_thk the philosophers time to think (in ms).
  ** @var        must_eat the maximum number of times each philo must eat.
  **
  ** @var        simstart the Epoch time when the simulation starts.
- ** @var        createko is true when pthread_create sucks, simulation stops.
  ** @var        done is true when all philos ate must_eat times, sim stops.
  ** @var        died is true when one philo died, simulation stops.
  ** @var        mutex an array of mutexes for the simulation operations.
@@ -75,10 +88,10 @@ typedef struct s_data
 	int				time_die;
 	int				time_eat;
 	int				time_slp;
+	int				time_thk;
 	int				must_eat;
 
 	unsigned long	simstart;
-	int				createko;
 	int				done;
 	int				died;
 	pthread_mutex_t	*mutex;

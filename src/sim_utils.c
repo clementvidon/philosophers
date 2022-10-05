@@ -21,8 +21,7 @@
 void	ft_print(t_philo *philo, char const *const action)
 {
 	/* int	stop_printing; */
-	if (philo->data->createko == TRUE)
-		return ;
+
 	/* pthread_mutex_lock (&philo->data->mutex[DONE]); */
 	/* stop_printing = philo->data->done; */
 	/* pthread_mutex_unlock (&philo->data->mutex[DONE]); */
