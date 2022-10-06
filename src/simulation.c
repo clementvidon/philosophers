@@ -19,120 +19,122 @@
  ** - Handle the 'one philo' case by making sure there are not only one fork on
  **   the table: 'lfork == rfork'.
  **
- ** @param[in]  philo the simulation's struct.
+ ** @param[in]  self the philosopher's data.
  ** @return     0 if everything went well, otherwise 1.
  */
 
-static int	ft_start_eating(t_philo *philo)
+static int	ft_start_eating(t_philo *self)
 {
-	int		lfork;
-	int		rfork;
-
-	lfork = philo->id - 1;
-	rfork = philo->id % philo->data->philo_nb;
-	pthread_mutex_lock (&philo->fork[ft_min (lfork, rfork)]);
-	ft_print (philo, "has taken a fork");
-	if (lfork == rfork)
+	pthread_mutex_lock (&self->fork[ft_min (self->lfork, self->rfork)]);
+	// XXX
+	/* if (ft_min(self->lfork, self->rfork) == self->rfork) */
+	/* 	ft_print (self, "take R"); */
+	/* else */
+	/* 	ft_print (self, "take L"); */
+	ft_print (self, "has taken a fork");
+	if (self->lfork == self->rfork)
 	{
-		pthread_mutex_unlock (&philo->fork[ft_min (lfork, rfork)]);
+		pthread_mutex_unlock (&self->fork[ft_min (self->lfork, self->rfork)]);
 		return (FAILURE);
 	}
-	pthread_mutex_lock (&philo->fork[ft_max (lfork, rfork)]);
-	ft_print (philo, "has taken a fork");
-	ft_print (philo, "is eating");
+	pthread_mutex_lock (&self->fork[ft_max (self->lfork, self->rfork)]);
+	// XXX
+	/* if (ft_max(self->lfork, self->rfork) == self->rfork) */
+	/* 	ft_print (self, "take R"); */
+	/* else */
+	/* 	ft_print (self, "take L"); */
+	ft_print (self, "has taken a fork");
+	ft_print (self, "is eating");
 	return (SUCCESS);
 }
 
 /*
- ** @brief      The philosopher release the forks.
+ ** @brief      The philosopher release the forks and sleep.
  **
- ** @param[in]  philo the simulation's struct.
+ ** We print "is sleeping" before forks release and we sleep after forks release
+ ** to make sure that "is sleeping" is printed right after "is eating".
+ **
+ ** @param[in]  self the philosopher's data.
  ** @return     0 if everything went well.
  */
 
-static int	ft_finish_eating(t_philo *philo)
+static int	ft_finish_eating(t_philo *self)
 {
-	int		lfork;
-	int		rfork;
-
-	lfork = philo->id - 1;
-	rfork = philo->id % philo->data->philo_nb;
-	pthread_mutex_unlock (&philo->fork[ft_max (lfork, rfork)]);
-	pthread_mutex_unlock (&philo->fork[ft_min (lfork, rfork)]);
+	ft_print (self, "is sleeping");
+	// XXX
+	/* if (ft_max(self->lfork, self->rfork) == self->rfork) */
+	/* 	ft_print (self, "released R"); */
+	/* else */
+	/* 	ft_print (self, "released L"); */
+	pthread_mutex_unlock (&self->fork[ft_max (self->lfork, self->rfork)]);
+	// XXX
+	/* if (ft_min(self->lfork, self->rfork) == self->rfork) */
+	/* 	ft_print (self, "released R"); */
+	/* else */
+	/* 	ft_print (self, "released L"); */
+	pthread_mutex_unlock (&self->fork[ft_min (self->lfork, self->rfork)]);
+	ft_msleep (self, (long)self->data->time_slp);
 	return (SUCCESS);
 }
 
 /*
  ** @brief      Philosopher's meal.
  **
- ** - To start to eat, each philosopher needs
- **   his own fork + his left neighbor's one:
- **
- **     RFork Philos LFork
- **     ------------------
- **  (P3) P0  ← P1 →  P1 (self)
- **       P1  ← P2 →  P2 (self)
- **       P2  ← P3 →  P0 (self)
- **     Where F0 belongs to philo P3.
- **
  ** - A meal is considered as +1 meal as soon as it starts.  Even though they
  **   are already considered as 'done' philos that started to eat have to
  **   properly finish eating by passing through 'time_eat'.
  **
- ** @param[in]  philo the simulation's struct.
+ ** @param[in]  self the philosopher's data.
  ** @return     0 if everything went well, otherwise 1.
  */
 
-static int	ft_eating(t_philo *philo)
+static int	ft_eating(t_philo *self)
 {
-	if (ft_start_eating (philo) != SUCCESS)
+	if (ft_start_eating (self) != SUCCESS)
 		return (FAILURE);
-	pthread_mutex_lock (&philo->data->mutex[MEALS]);
-	philo->last_meal = ft_abs_time ();
-	philo->meals_counter++;
-	pthread_mutex_unlock (&philo->data->mutex[MEALS]);
-	if (ft_check_done (philo))
+	pthread_mutex_lock (&self->data->mutex[MEALS]);
+	self->last_meal = ft_abs_time ();
+	self->meals_counter++;
+	pthread_mutex_unlock (&self->data->mutex[MEALS]);
+	if (ft_check_done (self))
 	{
-		ft_msleep (philo, (long)philo->data->time_eat);
-		ft_finish_eating (philo);
+		ft_msleep (self, (long)self->data->time_eat);
+		ft_finish_eating (self);
 		return (FAILURE);
 	}
-	ft_msleep (philo, (long)philo->data->time_eat);
-	ft_finish_eating (philo);
+	ft_msleep (self, (long)self->data->time_eat);
+	ft_finish_eating (self);
 	return (SUCCESS);
 }
 
 /*
  ** @brief      Philosopher's life cycle.
  **
- ** Even philosophers are delayed to prevent any conflict during the forks taking
- ** moment.
+ ** - Even philosophers are delayed to prevent any conflict during the forks
+ **   taking moment.
  **
- ** @param[in]  arg the simulation's struct.
+ ** @param[in]  arg the philosopher's data.
  ** @return     A NULL pointer.
  */
 
 void	*ft_simulation(void *arg)
 {
-	t_philo	*philo;
+	t_philo	*self;
 
-	philo = (t_philo *) arg;
-	if (philo->id % 2 == 0)
+	self = (t_philo *) arg;
+	if (self->id % 2 == 0)
 	{
-		ft_print (philo, "is thinking");
-		ft_msleep (philo, (long)philo->data->time_eat);
+		ft_print (self, "is thinking");
+		ft_msleep (self, (long)self->data->time_eat);
 	}
 	while (1)
 	{
-		if (ft_check_died(philo))
+		if (ft_check_died(self))
 			break ;
-		if (ft_eating (philo) != SUCCESS)
+		if (ft_eating (self) != SUCCESS)
 			break ;
-
-		ft_print (philo, "is sleeping");
-		ft_msleep (philo, (long)philo->data->time_slp);
-		ft_print (philo, "is thinking");
-		ft_msleep(philo, (long)philo->data->time_thk);
+		ft_print (self, "is thinking");
+		/* ft_usleep(self->data->time_thk, self->data->simbegin); */
 	}
 	return (NULL);
 }

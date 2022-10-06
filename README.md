@@ -63,13 +63,13 @@ Example of a dinner that should never stop:
 ➡️ **Minimum `time_die` for ODD `philo_nb`**:
 
 ```
-if time_eat <= time_slp
-
-	2 * (time_eat + time_slp) + m
-
-if time_eat > time_slp
+if time_eat >= time_slp
 
 	3 * time_eat + m
+
+if time_eat < time_slp
+
+	(time_eat + time_slp) + m
 ```
 
 *Where `m` is a margin of error of 1 or 2ms.*

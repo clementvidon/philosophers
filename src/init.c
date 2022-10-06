@@ -15,6 +15,17 @@
 /*
  ** @brief      Init s_philo an array of philosophers.
  **
+ ** - Each philosopher has two forks that are his
+ **   own fork at left + his neighbor's one at right:
+ **
+ **     i-1   i      i
+ **     RFork Philos LFork
+ **     ------------------
+ **       P2  ← P0 →  P0 (self fork at Left)
+ **       P0  ← P1 →  P1 (self fork at Left)
+ **       P1  ← P2 →  P2 (self fork at Left)
+ **     Where F0 belongs to philo P3.
+ **
  ** @param[in]  philo a pointer to s_philo struct set to NULL.
  ** @param[in]  data a pointer to an initialized s_data struct.
  ** @return     0 if everything went well, otherwise 1.
@@ -35,8 +46,13 @@ int	ft_init_philo(t_philo **philo, t_data *data)
 	while (i < data->philo_nb)
 	{
 		(*philo)[i].id = i + 1;
-		(*philo)[i].meals_counter = 0;
 		(*philo)[i].last_meal = ft_abs_time ();
+		(*philo)[i].meals_counter = 0;
+		(*philo)[i].lfork = i;
+		if (i - 1 < 0)
+			(*philo)[i].rfork = data->philo_nb - 1;
+		else
+			(*philo)[i].rfork = i - 1;
 		(*philo)[i].fork = fork;
 		(*philo)[i].data = data;
 		i++;
@@ -80,16 +96,26 @@ int	ft_init_data_mutexes(t_data **data)
 
 int	ft_init_data(t_data **data, int ac, char const *const *av)
 {
-	(*data)->simstart = ft_abs_time ();
-	if ((*data)->simstart == FAILURE)
+	(*data)->simbegin = ft_abs_time ();
+	if ((*data)->simbegin == FAILURE)
 		return (FAILURE);
 	(*data)->philo_nb = (int)ft_atol (av[1]);
 	(*data)->time_die = (int)ft_atol (av[2]);
 	(*data)->time_eat = (int)ft_atol (av[3]);
 	(*data)->time_slp = (int)ft_atol (av[4]);
-	(*data)->time_thk = 1;
-	if ((*data)->time_slp < (*data)->time_eat)
-		(*data)->time_thk += ((*data)->time_eat - (*data)->time_slp);
+
+	//TODO
+	// yuri
+	/* (*data)->time_thk = 1; */
+	/* if ((*data)->time_slp < (*data)->time_eat) */
+	/* 	(*data)->time_thk += ((*data)->time_eat - (*data)->time_slp); */
+
+	// TODO
+	// theo
+	/* (*data)->time_thk = 0; */
+	/* if ((*data)->philo_nb % 2) */
+	/* 	(*data)->time_thk = 7; */
+
 	if (ac == 5)
 		(*data)->must_eat = -1;
 	if (ac == 6)

@@ -20,17 +20,9 @@
 
 void	ft_print(t_philo *philo, char const *const action)
 {
-	/* int	stop_printing; */
-
-	/* pthread_mutex_lock (&philo->data->mutex[DONE]); */
-	/* stop_printing = philo->data->done; */
-	/* pthread_mutex_unlock (&philo->data->mutex[DONE]); */
-	/* pthread_mutex_lock (&philo->data->mutex[DIED]); */
-	/* stop_printing += philo->data->died; */
-	/* pthread_mutex_unlock (&philo->data->mutex[DIED]); */
 	pthread_mutex_lock (&philo->data->mutex[PRINT]);
 	if (*action == 'd' || (!ft_check_died (philo) && !ft_check_done (philo)))
-		printf ("%lu %i %s\n", ft_rel_time (philo), philo->id, action);
+		printf ("%lu %d %s\n", ft_rel_time (philo->data->simbegin), philo->id, action);
 	pthread_mutex_unlock (&philo->data->mutex[PRINT]);
 }
 
