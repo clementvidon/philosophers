@@ -90,10 +90,10 @@ typedef struct s_data
 	int					time_thk;
 	int					must_eat;
 
-	unsigned long	simbegin;
+	unsigned long		simbegin;
 	int					done;
 	int					died;
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t		*mutex;
 
 }					t_data;
 
@@ -127,28 +127,28 @@ typedef struct s_philo
  ** utils.c
  */
 
-long				ft_atol(char const *str);
-int					ft_min(int a, int b);
-int					ft_max(int a, int b);
+long			ft_atol(char const *str);
+int				ft_min(int a, int b);
+int				ft_max(int a, int b);
 
 /*
  ** sim_utils.c
  */
 
-void				ft_print(t_philo *philo, char const *const action);
-void				ft_died(t_data *data);
-void				ft_done(t_data *data);
-int					ft_check_died(t_philo *philo);
-int					ft_check_done(t_philo *philo);
+void			ft_print(t_philo *philo, char const *const a);
+void			ft_died(t_data *data);
+void			ft_done(t_data *data);
+int				ft_check_died(t_philo *philo);
+int				ft_check_done(t_philo *philo);
 
 /*
  ** time_utils.c
  */
 
-unsigned long		ft_abs_time(void);
-unsigned long		ft_rel_time(unsigned long begin);
-void				ft_msleep(t_philo *philo, unsigned long duration);
-void				ft_usleep(unsigned long usec, unsigned long begin);
+unsigned long	ft_abs_time(void);
+unsigned long	ft_rel_time(unsigned long begin);
+void			ft_msleep(t_philo *philo, unsigned long duration);
+void			ft_usleep(unsigned long usec, unsigned long begin);
 
 /*
  ** simulation.c
@@ -156,10 +156,10 @@ void				ft_usleep(unsigned long usec, unsigned long begin);
  ** @brief      Define each philosopher (threads) life cycle.
  */
 
-/* int  			ft_start_eating(t_philo *philo); */
-/* int  			ft_finish_eating(t_philo *philo); */
-/* int  			ft_eating(t_philo *philo); */
-void				*ft_simulation(void *arg);
+/* int  		ft_start_eating(t_philo *philo); */
+/* int  		ft_finish_eating(t_philo *philo); */
+/* int  		ft_eating(t_philo *philo); */
+void			*ft_simulation(void *arg);
 
 /*
  ** simulator.c
@@ -167,10 +167,10 @@ void				*ft_simulation(void *arg);
  ** @brief      Generate, manage and destroy the simulation required threads.
  */
 
-/* void 			ft_destroy_mutexes(t_philo *philo, t_data *data) */
-/* bool 			ft_are_done(t_philo *philo, t_data *data) */
-/* int  			ft_monitor(t_philo *philo, t_data *data) */
-int					ft_simulator(t_philo *philo, t_data *data);
+/* void 		ft_destroy_mutexes(t_philo *philo, t_data *data) */
+/* bool 		ft_are_done(t_philo *philo, t_data *data) */
+/* int  		ft_monitor(t_philo *philo, t_data *data) */
+int				ft_simulator(t_philo *philo, t_data *data);
 
 /*
  ** init.c
@@ -178,10 +178,10 @@ int					ft_simulator(t_philo *philo, t_data *data);
  ** @brief      Initialize the C structures.
  */
 
-int					ft_init_philo(t_philo **philo, t_data *data);
-int					ft_init_data_mutexes(t_data **data);
-int					ft_init_data(t_data **data, int ac, char const *const *argv);
-int					ft_init(t_philo **p, t_data **d, int ac, char const *const *av);
+int				ft_init_philo(t_philo **philo, t_data *data);
+int				ft_init_data_mutexes(t_data **data);
+int				ft_init_data(t_data **data, int ac, char const *const *av);
+int				ft_init(t_philo **p, t_data **d, int ac, char const *const *av);
 
 /*
  ** checkargs.c
@@ -189,15 +189,15 @@ int					ft_init(t_philo **p, t_data **d, int ac, char const *const *av);
  ** @brief      Protect and make sure the user given parameters are valid.
  */
 
-/* bool				ft_is_numeric(char const *str) */
-int					ft_check_args(int ac, char const *const *argv);
+/* bool			ft_is_numeric(char const *str) */
+int				ft_check_args(int ac, char const *const *argv);
 
 /*
  ** main.c
  */
 
-/* void				ft_clear_memory(t_philo *philo, t_data *data) */
-/* bool				ft_edgecases(int ac, char const *const *argv) */
-int					main(int ac, char const *const *argv);
+/* void			ft_clear_memory(t_philo *philo, t_data *data) */
+/* bool			ft_edgecases(int ac, char const *const *argv) */
+int				main(int ac, char const *const *argv);
 
 #endif

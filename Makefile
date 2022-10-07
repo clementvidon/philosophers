@@ -7,16 +7,17 @@ NAME		:= philo
 #   INGREDIENTS                                  #
 #------------------------------------------------#
 # SRC_DIR   source directory
-# OBJ_DIR   object directory
+# DST_DIR   build directory
 # SRCS      source files
 # OBJS      object files
+# DEPS      dependency files
 #
 # CC        compiler
 # CFLAGS    compiler flags
 # CPPFLAGS  preprocessor flags
 
 SRC_DIR     := src
-OBJ_DIR     := obj
+DST_DIR     := .build
 SRCS		:= \
 	main.c       \
 	checkargs.c  \
@@ -27,11 +28,12 @@ SRCS		:= \
 	sim_utils.c  \
 	utils.c
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
-OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(DST_DIR)/%.o)
+DEPS        := $(OBJS:.o=.d)
 
 CC          := clang
 CFLAGS      := -Wall -Wextra -Werror
-CPPFLAGS    := -I include
+CPPFLAGS    := -MMD -MP -I include
 LDLIBS      := -lpthread
 
 #------------------------------------------------#
@@ -44,7 +46,7 @@ LDLIBS      := -lpthread
 # HELGRIND  helgrind command
 
 RM          := rm -f
-MAKE        := $(MAKE) --no-print-directory
+MAKEFLAGS   += --no-print-directory
 DIR_DUP     = mkdir -p $(@D)
 VALGRIND    := valgrind -q --leak-check=yes --show-leak-kinds=all
 HELGRIND    := valgrind -q --tool=helgrind
@@ -66,13 +68,15 @@ $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(LDLIBS) -o $(NAME)
 	$(info CREATED $@)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(DST_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 	$(info CREATED $@)
 
+-include $(DEPS)
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
 	$(RM) $(NAME)

@@ -12,7 +12,7 @@
 - Once *awake* they *start thinking* again.
 - Simulation *stops if a philo dies of starvation*.
 
-- They *don't **[communicate](https://en.wikipedia.org/wiki/Dining_philosophers_problem)** with each other.
+- They don't **[communicate](https://en.wikipedia.org/wiki/Dining_philosophers_problem)** with each other.
 - They *don't know if one is about to die*.
 - They *should never die*.
 

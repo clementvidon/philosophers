@@ -2,173 +2,52 @@
 
 # Usage: 'bash custom.sh' from the Makefile file directory.
 
-helgrind_run()
-{
-    echo "========================================="
-    echo "===============[helgrind run]============"
-    echo "========================================="
-    MAKE="make --no-print-directory re hrun"
-
-    p="1 800 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="5 800 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="4 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="4 310 200 100"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="2 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="2 310 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-}
-
-valgrind_run()
-{
-    echo "========================================="
-    echo "===============[valgrind run]============"
-    echo "========================================="
-    MAKE="make --no-print-directory re vrun"
-
-    p="1 800 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="5 800 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="4 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="4 310 200 100"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="2 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="2 310 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-}
-
-san_thread()
-{
-    echo "========================================="
-    echo "===============[san thread]=============="
-    echo "========================================="
-    MAKE="make --no-print-directory tsan run"
-
-    p="1 800 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="5 800 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="4 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="4 310 200 100"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="2 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="2 310 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-}
-
-san_addr()
-{
-    echo "========================================="
-    echo "===============[san addr]================"
-    echo "========================================="
-    MAKE="make --no-print-directory asan run"
-
-    p="1 800 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="5 800 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="4 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="4 310 200 100"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="2 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
-    sleep 1
-    $MAKE p="$p";
-    p="2 310 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
-    $MAKE p="$p";
-}
-
 run()
 {
-    echo "========================================="
-    echo "===============[run]====================="
-    echo "========================================="
-    MAKE="make --no-print-directory run"
+    rule=$1
+    echo "===[ $rule ]==="
+    MAKE="make -j $rule"
+    sleep 2
 
     p="1 800 200 200"
-    echo " > philo " $p "SHOULD DIE"
+    echo " > philo " $p
     sleep 1
+    echo ">>>$MAKE"
     $MAKE p="$p";
+    echo "  >>> died <<<"
+    sleep 2
+
     p="5 800 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
+    echo " > philo " $p
     sleep 1
     $MAKE p="$p";
+
     p="4 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
+    echo " > philo " $p
     sleep 1
     $MAKE p="$p";
+
     p="4 310 200 100"
-    echo " > philo " $p "SHOULD DIE"
+    echo " > philo " $p
     sleep 1
     $MAKE p="$p";
+    echo "  >>> died <<<"
+    sleep 2
+
     p="2 410 200 200 7"
-    echo " > philo " $p "SHOULD NOT DIE"
+    echo " > philo " $p
     sleep 1
     $MAKE p="$p";
+
     p="2 310 200 200"
-    echo " > philo " $p "SHOULD DIE"
-    sleep 1
+    echo " > philo " $p
     $MAKE p="$p";
+    echo "  >>> died <<<"
+    sleep 2
 }
 
-helgrind_run;
-# valgrind_run;
-# san_thread;
-# san_addr;
-# run;
+run "re hrun";
+run "re vrun";
+run "re tsan run";
+run "re asan run";
+run "re run";

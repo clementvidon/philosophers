@@ -15,12 +15,16 @@
 /*
  ** @brief          Return the elapsed time since EPOCH.
  **
+ ** TODO
+ ** Handle 'gettimeofday' errors cause they are
+ ** triggerable from the user's side.
+ **
  ** @return         The elapsed time since EPOCH in millisecond.
  */
 
 unsigned long	ft_abs_time(void)
 {
-	struct timeval		time;
+	struct timeval	time;
 	unsigned long	s;
 	unsigned long	u;
 
@@ -51,19 +55,6 @@ unsigned long	ft_rel_time(unsigned long begin)
 	return (abs_time - begin);
 }
 
-void	ft_usleep(unsigned long usec, unsigned long begin)
-{
-	const unsigned long		time_to_reach = ft_rel_time (begin) + usec;
-	unsigned long			current;
-	while (1)
-	{
-		current = ft_rel_time (begin);
-		if (current >= time_to_reach)
-			return ;
-		usleep(10);
-	}
-}
-
 /*
  ** @brief          Millisecond sleep.
  **
@@ -75,8 +66,8 @@ void	ft_usleep(unsigned long usec, unsigned long begin)
 
 void	ft_msleep(t_philo *philo, unsigned long msec)
 {
-	const unsigned long		toreach = ft_rel_time (philo->data->simbegin) + msec;
-	unsigned long			current;
+	const unsigned long	toreach = ft_rel_time (philo->data->simbegin) + msec;
+	unsigned long		current;
 
 	while (1)
 	{
@@ -85,23 +76,4 @@ void	ft_msleep(t_philo *philo, unsigned long msec)
 			return ;
 		usleep(10);
 	}
-
-	/* unsigned long	start; */
-	/* unsigned long	current; */
-
-	/* start = ft_abs_time (); */
-	/* if (start == FAILURE) */
-	/* 	return ; */
-	/* while (1) */
-	/* { */
-	/* 	current = ft_abs_time () - start; */
-	/* 	if (current >= duration) */
-	/* 		break ; */
-	/* 	if (duration - current > 1000) */
-	/* 		usleep (100); */
-	/* 	else */
-	/* 		usleep ((unsigned int)((duration - current) / 10)); */
-	/* 	if (ft_check_done (philo) || ft_check_died (philo)) */
-	/* 		return ; */
-	/* } */
 }

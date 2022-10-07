@@ -88,6 +88,11 @@ int	ft_init_data_mutexes(t_data **data)
 /*
  ** @brief      Init s_data the simulator's data.
  **
+ ** Optimize the vizualizer "stairs" pattern:
+ **
+ **    If philo_nb % 2 and time_eat > time_slp
+ **    time_thk = 1 + time_eat - time_slp
+ **
  ** @param[in]  data a pointer to s_data struct set to NULL.
  ** @param[in]  ac the number of arguments given at program start.
  ** @param[in]  av the arguments given at program start.
@@ -103,19 +108,9 @@ int	ft_init_data(t_data **data, int ac, char const *const *av)
 	(*data)->time_die = (int)ft_atol (av[2]);
 	(*data)->time_eat = (int)ft_atol (av[3]);
 	(*data)->time_slp = (int)ft_atol (av[4]);
-
-	//TODO
-	// yuri
-	/* (*data)->time_thk = 1; */
-	/* if ((*data)->time_slp < (*data)->time_eat) */
-	/* 	(*data)->time_thk += ((*data)->time_eat - (*data)->time_slp); */
-
-	// TODO
-	// theo
-	/* (*data)->time_thk = 0; */
-	/* if ((*data)->philo_nb % 2) */
-	/* 	(*data)->time_thk = 7; */
-
+	(*data)->time_thk = 0;
+	if (((*data)->philo_nb % 2) && ((*data)->time_eat > (*data)->time_slp))
+		(*data)->time_thk = 1 + ((*data)->time_eat - (*data)->time_slp);
 	if (ac == 5)
 		(*data)->must_eat = -1;
 	if (ac == 6)

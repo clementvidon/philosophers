@@ -11,13 +11,11 @@
 	<span> · </span>
 	<a href="#resources">Resources</a>
 	<span> · </span>
-	<a href="#algo">Algo</a>
-	<span> · </span>
-	<a href="#optimization">Optimization</a>
-	<span> · </span>
 	<a href="#tools">Tools</a>
 	<span> · </span>
-	<a href="#helgrind-tutor">Helgrind tutor</a>
+	<a href="#helgrind-tutorial">Helgrind tutor</a>
+	<span> · </span>
+	<a href="#optimization">Optimization</a>
 </h3>
 
 ##  Summary
@@ -36,15 +34,18 @@ Code written in accordance with **42 C** coding style,  **ANSI C89** compliant a
 
 Run `make` in the root of the projet and launch as follows:
 
-    ./philo <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep> [ <must_eat> ]
+    ./philo <philo_nb> <time_die> <time_eat> <time_slp> [ <must_eat> ]
 
-- `number_of_philosophers` -- the number of philosophers and forks.
-- `time_to_die` -- A philosopher dies if he doesn't start to eat `time_to_die`
-  ms after **the beginning of his last meal** (or the simulation).
-- `time_to_eat` -- The time it takes for a philosopher to eat.
-- `time_to_sleep` -- The time it takes for a philosopher to sleep.
-- `must_eat` -- (optional) simulation stops if all philosophers ate at least such
-  amount of times.
+- `philo_nb` -- the number of philosophers and forks.
+- `time_die` -- A philosopher dies if he doesn't start to eat `time_die` ms
+  after **the beginning of his last meal** (or the simulation).
+- `time_eat` -- The time it takes for a philosopher to eat.
+- `time_slp` -- The time it takes for a philosopher to sleep.
+- `must_eat` -- (optional) simulation stops if all philosophers ate at least
+  such amount of times.
+
+- IF NOT `must_eat` THEN simulation stops at first death.
+- IF `philo_nb > 200` OR `time_to_* < 60` ms THEN undefined behavior.
 
 Example of a dinner that should never stop:
 
@@ -57,7 +58,7 @@ Example of a dinner that should never stop:
 ➡️ **Minimum `time_die` for EVEN `philo_nb`**:
 
 ```
-	2 x time_eat + m
+	2 x time_eat + e
 ```
 
 ➡️ **Minimum `time_die` for ODD `philo_nb`**:
@@ -65,20 +66,14 @@ Example of a dinner that should never stop:
 ```
 if time_eat >= time_slp
 
-	3 * time_eat + m
+	3 * time_eat + e
 
 if time_eat < time_slp
 
-	(time_eat + time_slp) + m
+	time_eat + time_slp + e
 ```
 
-*Where `m` is a margin of error of 1 or 2ms.*
-
-- If a number of meals is not specified the simulation stops at the death of any
-philosophers.
-
-- A `number_of_philosophers` > 200 and a `time_to` param < 60 ms may cause
-undefined behavior.
+*Where `e` is a margin of error starting from +1ms.*
 
 ***Makefile rules***
 
@@ -89,7 +84,7 @@ undefined behavior.
 
 ##  Tester
 
-The tester will run specified test 5 times:
+The tester will run specified tests 5 times:
 1. with helgrind
 2. with valgrind
 3. with sanitizer=address
@@ -105,99 +100,22 @@ The second test will run the test of your choice 5 times:
 ##  Resources
 
 - **[CodeVault](https://www.youtube.com/playlist?list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)**<br>
+
 - **[Concurrent programming](https://begriffs.com/posts/2020-03-23-concurrent-programming.html)**<br>
-
-##  Algo
-
-* **Philosophers**
-
-Philosophers are **named with identifier** numbers starting at 1.
-We can cycle through each of them with the following formula:
-
-    while (1)
-    {
-        index = (index + 1) % number_of_philosophers;
-        printf ("I am %i.\n", philo[index]->id);
-    }
-
-Where `index` is equal to `philo[index]->id - 1`:
-
-    philo[0] = 1;
-    philo[1] = 2;
-    philo[2] = 3;
-
-* **Forks**
-
-Each philosopher uses his own fork plus his left neighbor's one:
-
-Philos Identifiers:
-
-    RFork   Philo   LFork
-     -------------------
-      2     ← 1 →     1
-      1     ← 3 →     3
-      3     ← 2 →     2
-
-To obtain the `indexes` of `philo->id`'s two forks we can use:
-
-    LFork = philo->id - 1;
-    RFork = philo->id % number_of_philosophers;
-
-##  Optimization
-
-1. **Locking granularity**:
-
-"The **granularity of a lock is how much data it protects**. A lock with coarse
-granularity will protect a large amount of data, and a lock with fine
-granularity will protect a small amount of data.
-
-Although it is tempting **to place locks at the finest level of granularity**
-possible, it **is not usually the best strategy**. Having many locks with fine
-granularity tends to introduce overhead. The overhead comes from the increased
-amount of memory needed to hold these locks and the decreased likelihood that
-the locks will be cache resident when they are needed.
-
-However, having few locks usually results in those locks becoming contended by
-multiple threads, which limits the scaling of the application. Therefore, the
-granularity of the locks is usually some kind of **trade-off** between a few
-contended locks and many uncontended locks. The appropriate balancing point will
-**depend on the number of threads**, so it may actually change if the application
-is run with different workloads of with different numbers of threads. Hence, it
-is important to test an application with both representative workloads and on a
-representative system with sufficient virtual CPUs.
-
-The key to picking the **optimal locking strategy** is often a good grasp of the
-**theoretical performance** of the application, in comparison with the actual
-profile of the application. It is also important to examine the actual scaling
-of the application as the number of threads increase."
-
-*Source: Multicore Application Programming by Darryl Gove*
-
-2. **[Performance Analysis with Callgrind and Cachegrind](https://www.vi-hps.org/cms/upload/material/tw10/vi-hps-tw10-KCachegrind.pdf)**
 
 ##  Tools
 
 - **[philosophers-visualizer](https://nafuka11.github.io/philosophers-visualizer/)**
 
-###  Memory
-
 - **[ft_mallocator](https://github.com/tmatis/ft_mallocator)**
 
-> Don't forget to protect '**pthread_create**', ft_mallocator won't warn you
-> about this one.
->
-> Don't forget to protect '**gettimeofday**', no malloc behind but easily
-> crash-able from the user side.
-
 - **valgrind**: `valgrind -q --leak-check=yes --show-leak-kinds=all`
-
-###  Thread
 
 - **sanitizer**: `-fsanitize=thread`
 
 - **valgrind**: `valgrind -q --tool=helgrind`
 
-##  Helgrind tutor
+##  Helgrind tutorial
 
 How to track and fix a data race?
 
@@ -261,3 +179,36 @@ Or like this:
     pthread_mutex_unlock (&philo->data->mutex[DIED]);
     if (died)
        return ;
+
+##  Optimization
+
+1. **Locking granularity**:
+
+"The **granularity of a lock is how much data it protects**. A lock with coarse
+granularity will protect a large amount of data, and a lock with fine
+granularity will protect a small amount of data.
+
+Although it is tempting **to place locks at the finest level of granularity**
+possible, it **is not usually the best strategy**. Having many locks with fine
+granularity tends to introduce overhead. The overhead comes from the increased
+amount of memory needed to hold these locks and the decreased likelihood that
+the locks will be cache resident when they are needed.
+
+However, having few locks usually results in those locks becoming contended by
+multiple threads, which limits the scaling of the application. Therefore, the
+granularity of the locks is usually some kind of **trade-off** between a few
+contended locks and many uncontended locks. The appropriate balancing point will
+**depend on the number of threads**, so it may actually change if the application
+is run with different workloads of with different numbers of threads. Hence, it
+is important to test an application with both representative workloads and on a
+representative system with sufficient virtual CPUs.
+
+The key to picking the **optimal locking strategy** is often a good grasp of the
+**theoretical performance** of the application, in comparison with the actual
+profile of the application. It is also important to examine the actual scaling
+of the application as the number of threads increase."
+
+*Source: Multicore Application Programming by Darryl Gove*
+
+2. **[Performance Analysis with Callgrind and Cachegrind](https://www.vi-hps.org/cms/upload/material/tw10/vi-hps-tw10-KCachegrind.pdf)**
+

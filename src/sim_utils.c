@@ -16,13 +16,14 @@
  ** @brief      Log each philosopher's life cycle actions into the terminal.
  **
  ** @param[in]  philo the simulation's struct.
+ ** @param[in]  a the philo's action
  */
 
-void	ft_print(t_philo *philo, char const *const action)
+void	ft_print(t_philo *philo, char const *const a)
 {
 	pthread_mutex_lock (&philo->data->mutex[PRINT]);
-	if (*action == 'd' || (!ft_check_died (philo) && !ft_check_done (philo)))
-		printf ("%lu %d %s\n", ft_rel_time (philo->data->simbegin), philo->id, action);
+	if (*a == 'd' || (!ft_check_died (philo) && !ft_check_done (philo)))
+		printf("%lu %d %s\n", ft_rel_time(philo->data->simbegin), philo->id, a);
 	pthread_mutex_unlock (&philo->data->mutex[PRINT]);
 }
 

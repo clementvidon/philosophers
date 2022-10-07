@@ -95,7 +95,7 @@ static int	ft_monitor(t_philo *philo, t_data *data)
 			break ;
 		}
 		i = (i + 1) % data->philo_nb;
-		usleep (100);
+		usleep (100); // TODO improve 200 410 200 200 perf
 	}
 	return (SUCCESS);
 }
@@ -104,6 +104,9 @@ static int	ft_monitor(t_philo *philo, t_data *data)
  ** @brief      Threads manager.
  **
  ** Generate, manage and destroy the simulation required threads.
+ **
+ ** TODO
+ ** Protect 'pthread_create' cause there is a malloc behind.
  **
  ** @param[in]  philo the simulation's struct.
  ** @param[in]  data the simulator's struct.
@@ -130,11 +133,11 @@ int	ft_simulator(t_philo *philo, t_data *data)
 	}
 	if (ft_monitor (philo, data) != SUCCESS)
 		return ((void)ft_destroy_mutexes (philo, data), (void)free (threads),
-				FAILURE);
+			FAILURE);
 	i = -1;
 	while (++i < data->philo_nb)
 		if (pthread_join (threads[i], NULL))
 			return (FAILURE);
 	return ((void)ft_destroy_mutexes (philo, data), (void)free (threads),
-			SUCCESS);
+		SUCCESS);
 }
