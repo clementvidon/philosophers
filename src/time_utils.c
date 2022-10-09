@@ -52,8 +52,8 @@ unsigned long	ft_rel_time(unsigned long begin)
 /*
  ** @brief      Sleep in millisec.
  **
- ** By dividing my break into several parts I correct a little the imprecision
- ** of USLEEP(3) for the large values.
+ ** By dividing my sleep into several parts I correct a little the imprecision
+ ** of USLEEP(3) for the large values. We substract the residual imprecision.
  **
  ** @param[in]  msec the time in millisec
  **
@@ -61,14 +61,15 @@ unsigned long	ft_rel_time(unsigned long begin)
 
 void	ft_msleep(unsigned long msec)
 {
-	usleep (msec * 100);
-	usleep (msec * 100);
-	usleep (msec * 100);
-	usleep (msec * 100);
-	usleep (msec * 100);
-	usleep (msec * 100);
-	usleep (msec * 100);
-	usleep (msec * 100);
-	usleep (msec * 100);
-	usleep (msec * 100);
+	unsigned long	stop;
+	unsigned long	current;
+
+	stop = ft_abs_time() + msec + (unsigned long)(msec / 100);
+	while (1)
+	{
+		current = ft_abs_time();
+		if (current >= stop)
+			return ;
+		usleep(10);
+	}
 }

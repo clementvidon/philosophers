@@ -57,6 +57,7 @@ static int	ft_are_done(t_philo *philo, t_data *data)
 		if (meals_count >= data->must_eat)
 			if (++done == data->philo_nb - 1)
 				return (TRUE);
+		usleep (50);
 	}
 	return (FALSE);
 }
