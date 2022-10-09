@@ -147,8 +147,7 @@ int				ft_check_done(t_philo *philo);
 
 unsigned long	ft_abs_time(void);
 unsigned long	ft_rel_time(unsigned long begin);
-void			ft_msleep(t_philo *philo, unsigned long duration);
-void			ft_usleep(unsigned long usec, unsigned long begin);
+void			ft_msleep(unsigned long msec);
 
 /*
  ** simulation.c

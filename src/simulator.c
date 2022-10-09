@@ -95,7 +95,7 @@ static int	ft_monitor(t_philo *philo, t_data *data)
 			break ;
 		}
 		i = (i + 1) % data->philo_nb;
-		usleep (100); // TODO improve 200 410 200 200 perf
+		usleep (200);
 	}
 	return (SUCCESS);
 }
@@ -116,28 +116,27 @@ static int	ft_monitor(t_philo *philo, t_data *data)
 int	ft_simulator(t_philo *philo, t_data *data)
 {
 	int			i;
-	pthread_t	*threads;
+	pthread_t	*th;
 
-	threads = malloc (sizeof (pthread_t) * (size_t)data->philo_nb);
-	if (threads == NULL)
+	th = malloc (sizeof (pthread_t) * (size_t)data->philo_nb);
+	if (th == NULL)
 		return (FAILURE);
 	i = -1;
 	while (++i < data->philo_nb)
 	{
-		if (pthread_create (&threads[i], 0, ft_simulation, (void *)&philo[i]))
+		if (pthread_create (&th[i], 0, ft_simulation, (void *)&philo[i]))
 		{
 			while (i--)
-				pthread_join (threads[i], NULL);
-			return ((void)free (threads), FAILURE);
+				pthread_join (th[i], NULL);
+			return ((void)free (th), FAILURE);
 		}
 	}
 	if (ft_monitor (philo, data) != SUCCESS)
-		return ((void)ft_destroy_mutexes (philo, data), (void)free (threads),
+		return ((void)ft_destroy_mutexes (philo, data), (void)free (th),
 			FAILURE);
 	i = -1;
 	while (++i < data->philo_nb)
-		if (pthread_join (threads[i], NULL))
+		if (pthread_join (th[i], NULL))
 			return (FAILURE);
-	return ((void)ft_destroy_mutexes (philo, data), (void)free (threads),
-		SUCCESS);
+	return ((void)ft_destroy_mutexes (philo, data), (void)free (th), SUCCESS);
 }

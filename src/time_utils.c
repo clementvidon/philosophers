@@ -15,9 +15,8 @@
 /*
  ** @brief          Return the elapsed time since EPOCH.
  **
- ** TODO
- ** Handle 'gettimeofday' errors cause they are
- ** triggerable from the user's side.
+ ** TODO Handle 'gettimeofday' errors cause they are triggerable from
+ ** the user's side.
  **
  ** @return         The elapsed time since EPOCH in millisecond.
  */
@@ -29,10 +28,7 @@ unsigned long	ft_abs_time(void)
 	unsigned long	u;
 
 	if (gettimeofday (&time, NULL) == -1)
-	{
-		write (2, "Error: 'gettimeofday' fail.\n", 28);
-		return (FAILURE);
-	}
+		write (2, "Error: GETTIMEOFDAY(2)\n", 28);
 	s = time.tv_sec * 1000;
 	u = time.tv_usec / 1000;
 	return (s + u);
@@ -50,30 +46,29 @@ unsigned long	ft_rel_time(unsigned long begin)
 	unsigned long	abs_time;
 
 	abs_time = ft_abs_time ();
-	if (abs_time == FAILURE)
-		return (FAILURE);
 	return (abs_time - begin);
 }
 
 /*
- ** @brief          Millisecond sleep.
+ ** @brief      Sleep in millisec.
  **
- ** Like 'usleep' function but millisecond instead of microsecond.
+ ** By dividing my break into several parts I correct a little the imprecision
+ ** of USLEEP(3) for the large values.
  **
- ** @param[in]      philo the simulation's struct.
- ** @param[in]      duration the sleep duration in millisecond.
+ ** @param[in]  msec the time in millisec
+ **
  */
 
-void	ft_msleep(t_philo *philo, unsigned long msec)
+void	ft_msleep(unsigned long msec)
 {
-	const unsigned long	toreach = ft_rel_time (philo->data->simbegin) + msec;
-	unsigned long		current;
-
-	while (1)
-	{
-		current = ft_rel_time (philo->data->simbegin);
-		if (current >= toreach)
-			return ;
-		usleep(10);
-	}
+	usleep (msec * 100);
+	usleep (msec * 100);
+	usleep (msec * 100);
+	usleep (msec * 100);
+	usleep (msec * 100);
+	usleep (msec * 100);
+	usleep (msec * 100);
+	usleep (msec * 100);
+	usleep (msec * 100);
+	usleep (msec * 100);
 }

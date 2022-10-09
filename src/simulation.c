@@ -53,7 +53,7 @@ static int	ft_finish_eating(t_philo *self)
 	ft_print (self, "is sleeping");
 	pthread_mutex_unlock (&self->fork[ft_max (self->lfork, self->rfork)]);
 	pthread_mutex_unlock (&self->fork[ft_min (self->lfork, self->rfork)]);
-	ft_msleep (self, (long)self->data->time_slp);
+	ft_msleep (self->data->time_slp);
 	return (SUCCESS);
 }
 
@@ -78,11 +78,10 @@ static int	ft_eating(t_philo *self)
 	pthread_mutex_unlock (&self->data->mutex[MEALS]);
 	if (ft_check_done (self))
 	{
-		ft_msleep (self, (long)self->data->time_eat);
 		ft_finish_eating (self);
 		return (FAILURE);
 	}
-	ft_msleep (self, (long)self->data->time_eat);
+	ft_msleep (self->data->time_eat);
 	ft_finish_eating (self);
 	return (SUCCESS);
 }
@@ -92,6 +91,10 @@ static int	ft_eating(t_philo *self)
  **
  ** - Even philosophers are delayed to prevent any conflict during the forks
  **   taking moment.
+ **
+ ** XXX
+ ** Passing from ft_msleep (with a while usleep(10) inside) to usleep made
+ ** me pass from 700% CPU use to <20%.
  **
  ** @param[in]  arg the philosopher's data.
  ** @return     A NULL pointer.
@@ -105,7 +108,7 @@ void	*ft_simulation(void *arg)
 	if (self->id % 2 == 0)
 	{
 		ft_print (self, "is thinking");
-		ft_msleep (self, self->data->time_eat);
+		ft_msleep (self->data->time_eat);
 	}
 	while (1)
 	{
@@ -114,7 +117,7 @@ void	*ft_simulation(void *arg)
 		if (ft_eating (self) != SUCCESS)
 			break ;
 		ft_print (self, "is thinking");
-		ft_msleep (self, self->data->time_thk);
+		ft_msleep (self->data->time_thk);
 	}
 	return (NULL);
 }

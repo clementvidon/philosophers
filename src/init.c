@@ -46,7 +46,7 @@ int	ft_init_philo(t_philo **philo, t_data *data)
 	while (i < data->philo_nb)
 	{
 		(*philo)[i].id = i + 1;
-		(*philo)[i].last_meal = ft_abs_time ();
+		(*philo)[i].last_meal = data->simbegin;
 		(*philo)[i].meals_counter = 0;
 		(*philo)[i].lfork = i;
 		if (i - 1 < 0)
@@ -102,8 +102,6 @@ int	ft_init_data_mutexes(t_data **data)
 int	ft_init_data(t_data **data, int ac, char const *const *av)
 {
 	(*data)->simbegin = ft_abs_time ();
-	if ((*data)->simbegin == FAILURE)
-		return (FAILURE);
 	(*data)->philo_nb = (int)ft_atol (av[1]);
 	(*data)->time_die = (int)ft_atol (av[2]);
 	(*data)->time_eat = (int)ft_atol (av[3]);
