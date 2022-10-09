@@ -103,6 +103,8 @@ typedef struct s_data
  ** @var        id the name of the philosopher.
  ** @var        last_meal the Epoch time of the last meal eaten.
  ** @var        meals_counter the number of meals eaten.
+ ** @var        lfork philosopher's left fork
+ ** @var        rfork philosopher's right fork
  ** @var        fork a mutex that symbolize one fork from philos dining problem.
  ** @var        data the access to s_data parameters.
  */

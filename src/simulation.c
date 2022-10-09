@@ -93,7 +93,7 @@ static int	ft_eating(t_philo *self)
  **   taking moment.
  **
  ** XXX
- ** Passing from ft_msleep (with a while usleep(10) inside) to usleep made
+ ** Passing from ft_msleep (containing a while usleep(10)) to usleep made
  ** me pass from 700% CPU use to <20%.
  **
  ** @param[in]  arg the philosopher's data.
